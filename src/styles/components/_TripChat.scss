@@ -1,0 +1,45 @@
+.post-chat{
+    height: 100%;
+    width: 100%;
+}
+
+.group-chat {
+    padding: 10px;
+    height: 84%;
+    overflow: scroll;
+    overflow-x: hidden;
+    // scroll-behavior: inherit;
+    // scr
+}
+
+.new-msg-area {
+    height: 16%;
+    width: 100%;
+    box-shadow: inset 0px 0px 1px 0px black
+}
+
+li{
+    margin-bottom: 5px;
+    width: max-content;
+    list-style-type: none;
+    background-color: rgba(39, 39, 39, 0.904);
+    color: whitesmoke;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+.new-msg-input {
+    padding: 5px;
+    width: 92%;
+    height: 100%;
+}
+.new-msg-input:focus {
+    outline: none;
+}
+
+i{
+    align-self: center;
+    cursor: pointer;
+    background: none;
+    -webkit-appearance: none;
+}

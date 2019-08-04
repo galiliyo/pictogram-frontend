@@ -1,0 +1,23 @@
+
+
+
+.login-container {
+  background: rgb(253, 253, 253);
+  border: 1px solid #ddd;
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.12);
+  width: 80%;
+  border-radius: 3px;
+  padding: 2rem 4rem 4rem;
+  width: 32rem;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: 10rem;
+}
+
+//TODO : center mixin
+
+
+.input-password{
+    margin-bottom: 4rem;
+}

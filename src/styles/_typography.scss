@@ -1,0 +1,77 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+{
+  font-family: "Raleway";
+  font-size: 2.4rem;
+  color: $text-dark;
+}
+h1 {
+  font-size: 2.441rem;
+}
+h2 {
+  font-size: 1.953rem;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 1.563rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  
+}
+
+p,
+label,
+input,
+pre,
+h6
+a {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  color: $text-dark;
+}
+.text-dark {
+    color: $text-dark;
+  }
+  
+.text-grey {
+  color: $text-grey;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.subheader-4 {
+  font-size: 1.8rem;
+  font-weight: normal;
+}
+
+
+
+.light{
+    font-weight: 300;
+}
+
+.tags, h6{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $text-dark;
+}
+
+.icon{
+  color: $text-dark;
+  size: 1.1rem;
+  margin-right: 0.4rem;
+}
