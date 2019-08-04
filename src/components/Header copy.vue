@@ -4,37 +4,32 @@
       <div class="logo">
         <!-- <img src="../assets/img/logo/logo-dark.png" /> -->
       </div>
+      {{loggedInUser}}
       <!-- <v-btn @click="showNotif('main', 'success')"></v-btn> -->
       <div class="nav-links">
         <button class="btn-link dark" v-if="loggedInUser" @click="logout">Logout</button>
         <router-link v-if="!loggedInUser" to="/Signup">
           <span class="dark">Signup</span>
         </router-link>
-        <button class="btn-link dark" v-if="!loggedInUser" @click="showLoginModal">Login</button>
-        <router-link to="/about">
-          <span class="dark">About</span>
-        </router-link>
+       
+       
         <router-link to="/">
-          <span class="dark">Home</span>
+          <span class="dark">Feed</span>
         </router-link>
         <img v-if="loggedInUser" @click="goUserProfile" class="user-img" :src="loggedInUser.imgUrl" />
       </div>
     </div>
-    <Login v-if="showLogin" />
   </section>
 </template>
 
 
 <script>
-import Login from "../components/Login";
 export default {
   data() {
-    return {
-      showLogin: false,
-      alert: false
-    };
+    return {};
   },
-  created() {},
+  created() {
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedInUser;
@@ -47,8 +42,8 @@ export default {
     goUserProfile() {
       this.$router.push(`/UserProfile/${this.loggedInUser._id}`);
     },
-    showLoginModal() {
-      this.showLogin = true;
+    toggleLogin() {
+      this.$store.commit("toggleLogin");
     }
   },
   props: {
@@ -56,12 +51,10 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  components: {
-    Login
   }
 };
 </script>
+
 
 
 <style lang="scss" scoped>

@@ -1,10 +1,9 @@
 <template>
   <div class="post card mb-3">
-    <div class="post-header pa-2">
+    <div v-if = "owner" class="post-header pa-2">
       <div class="top-row flex">
         <v-avatar class="avatar mr-3" :size="48">
           <img v-if="owner.imgUrl" :src="owner.imgUrl" alt="avatar" />
-          <span v-else>VJ</span>
         </v-avatar>
         <div class="header-txt">
           <h6>{{owner.firstName}} {{owner.lastName}}</h6>
@@ -25,6 +24,7 @@
           <i class="icon icon-megaphone btn-icon"></i>
         </div>
       </div>
+        <h6 v-show="post.likedBy.length>0">Liked by {{post.likedBy.length}}</h6>
       <p>
         {{post.txt}}
         <span class="tags" v-for="(tag,i) in post.tags" :key="i">&nbsp #{{tag}}</span>

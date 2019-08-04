@@ -2,7 +2,6 @@
   <section class="section-signup">
     <div>
       <Header class="colorBg"></Header>
-      <Login v-if="loginModal" />
     </div>
     <div class="signup-container">
       <div class="signup-form">
@@ -32,12 +31,7 @@
               <input type="text" placeholder="Last Name" v-model="newUser.lastName" required />
             </div>
           </label>
-          <label>
-            Country
-            <div>
-              <input type="text" placeholder="Country" v-model="newUser.resCountry" required />
-            </div>
-          </label>
+        
 
           <div>
             <label>
@@ -55,7 +49,6 @@
 
 <script>
 import Header from "../components/Header";
-import Login from "../components/Login";
 export default {
   data() {
     return {
@@ -66,23 +59,11 @@ export default {
         lastName: "",
         imgUrl:
           "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg",
-        resCountry: "",
-        aboutMe: "",
-        yearOfBirth: "",
-        interests: "",
-        socialMedia: "",
-        pending: [],
-        joining: [],
-        tripsOwner: []
+          likedPosts: [],
       }
     };
   },
-  created() {},
-  computed: {
-    loginModal() {
-      return this.$store.getters.loginModal;
-    }
-  },
+
   methods: {
     async signup() {
       const file = this.$refs.upload.files[0];
@@ -96,17 +77,16 @@ export default {
           userCredential: this.newUser
         });
         this.$router.push("/");
-        this.$swal("Signup Successfully", "", "success");
+        //todo notification success
       } catch (err) {
         // swal
         this.$router.push("/");
-        this.$swal("Email exsits, please Login", "", "error");
+        // this.$swal("Email exsits, please Login", "", "error");
       }
     }
   },
   components: {
-    Header,
-    Login
+    Header
   }
 };
 </script>

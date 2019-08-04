@@ -2,7 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 import Feed from "./views/Feed.vue";
 import PostEdit from "./views/PostEdit.vue";
-import Login from './views/Login.vue'
 import Signup from "./views/Signup.vue";
 import UserProfile from "./views/UserProfile.vue";
 

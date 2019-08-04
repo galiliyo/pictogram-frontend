@@ -6,7 +6,7 @@
         <v-text-field
           label="E-mail"
           type="email"
-          autofocus = "true"
+          autofocus
           append-icon="email"
           color="deep-orange accent-3"
           minlength="3"
@@ -25,6 +25,7 @@
         />
         <button class="btn-main full-width">Login</button>
       </form>
+     
     </div>
   </section>
 </template>
@@ -35,6 +36,7 @@ export default {
     return {
       user: { email: "", pass: "" }
       // loggedInUser: null
+
     };
   },
   computed: {
@@ -48,9 +50,11 @@ export default {
       try {
         await this.$store.dispatch({ type: "login", user: this.user });
         this.user = { email: "", pass: "" };
-        this.$swal("Login Successfully", "", "success");
       } catch (err) {
-        this.$swal("Wrong password or username", "", "error");
+        this.$parent.$emit('alertLoginFail');
+        console.log("no luck");
+
+       
       }
     }
   }

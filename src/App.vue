@@ -3,6 +3,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+   
   </v-app>
 </template>
 
@@ -13,13 +14,14 @@ import SocketService from "./services/SocketService";
 export default {
   name: "App",
   data() {
-    return {};
+    return {
+    };
   },
   created() {
     SocketService.on("welcome", txt => {
       console.log(txt);
       alert("txt arrive");
-    }); 
+    });
   },
   computed: {},
   methods: {},

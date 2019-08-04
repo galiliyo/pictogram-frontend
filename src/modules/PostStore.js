@@ -86,6 +86,7 @@ export default {
         }
       }
     },
+    // async getComments(context, {post}){}
     async uploadImg(context, { file }) {
       try {
         const url = await PostService.handleUploadImage(file);

@@ -1,16 +1,14 @@
 <template>
   <section class="feed">
     <div class="header">
-      <AppHeader class="colorBg" />
-      <Login v-if="loginModal" @setFilter="setFilter" />
+      <AppHeader class="colorBg" @alertLoginFail="alertLoginFail()" />
+
     </div>
     <div class="main-container">
-     <div class="posts-column">
-      <post v-for = "(post,i) in posts" :post="post" :key="i">{{posts}}</post>
+      <div class="posts-column">
+        <post v-for="(post,i) in posts" :post="post" :key="i">{{posts}}</post>
       </div>
-      <div class="users-column">
-        
-      </div>
+      <div class="users-column"></div>
       <button class="btn-add" @click="goEdit">
         <span>+</span>
       </button>
@@ -20,14 +18,14 @@
 
 
 <script>
-// import Feed from "../components/Feed ";
 import AppHeader from "../components/Header";
 import Post from "../components/Post";
-import Login from "../components/Login";
 
 export default {
   data() {
-    return {};
+    return {
+      alert: false
+    };
   },
   created() {
     this.loadPosts();
@@ -38,9 +36,6 @@ export default {
     },
     loggedInUser() {
       return this.$store.getters.loggedInUser;
-    },
-    loginModal() {
-      return this.$store.getters.loginModal;
     }
   },
   methods: {
@@ -57,11 +52,14 @@ export default {
     },
     goEdit() {
       this.$router.push("/PostEdit");
+    },
+    alertLoginFail() {
+      console.log("aaaaa");
+      this.alert = true;
     }
   },
   components: {
     AppHeader,
-    Login,
     Post
   }
 };

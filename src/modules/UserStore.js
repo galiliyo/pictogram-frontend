@@ -6,9 +6,6 @@ export default {
     state: {
         users: [],
         loggedInUser: AuthService.getLoggedInUser(),
-        waitingList: [],
-        participantsList: [],
-        loginModal: false
     },
     mutations: {
         setLoggedInUser(state, { user }) {
@@ -22,10 +19,10 @@ export default {
             const idx = state.users.findIndex(currUser => currUser._id === user._id)
             state.users.splice(idx, 1, user)
             if (state.loggedInUser && state.loggedInUser._id === user._id) state.loggedInUser = user;
-        },
-        toggleLogin(state) {
-            state.loginModal = !state.loginModal;
         }
+        // toggleLogin(state) {
+        //     state.loginModal = !state.loginModal;
+        // }
     },
     getters: {
         loggedInUser(state) {
@@ -33,9 +30,6 @@ export default {
         },
         waitingList(state) {
             return state.waitingList;
-        },
-        loginModal(state) {
-            return state.loginModal;
         }
     },
     actions: {
