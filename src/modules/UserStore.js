@@ -1,6 +1,5 @@
 import AuthService from '../services/AuthService.js'
 import UserService from '../services/UserService.js'
-import SocketService from '../services/SocketService.js'
 
 export default {
     state: {
@@ -20,24 +19,19 @@ export default {
             state.users.splice(idx, 1, user)
             if (state.loggedInUser && state.loggedInUser._id === user._id) state.loggedInUser = user;
         }
-        // toggleLogin(state) {
-        //     state.loginModal = !state.loginModal;
-        // }
+       
     },
     getters: {
         loggedInUser(state) {
             return state.loggedInUser;
-        },
-        waitingList(state) {
-            return state.waitingList;
         }
+       
     },
     actions: {
         async login(context, { user }) {
             try {
                 const loggedInUser = await AuthService.login(user)
                 context.commit({ type: 'setLoggedInUser', user: loggedInUser })
-                SocketService.emit('create room', { loggedInUser })
             } catch (err) {
                 throw err;
             }
@@ -46,7 +40,6 @@ export default {
             try {
                 const loggedInUser = await AuthService.signup(userCredential)
                 context.commit({ type: 'setLoggedInUser', user: loggedInUser })
-                SocketService.emit('createRoom', loggedInUser._id)
             } catch (err) {
                 throw err;
             }

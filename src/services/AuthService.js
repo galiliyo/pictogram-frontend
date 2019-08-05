@@ -21,7 +21,7 @@ async function login(user) {
 }
 
 async function signup(userCredential) {
-    console.log('signup',userCredential);
+    
     
     const loggedInUser = await HttpService.post(_getUrl('signup'), userCredential)
     sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));

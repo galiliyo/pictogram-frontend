@@ -1,15 +1,17 @@
 import HttpService from "./HttpService";
+import AuthService from "./AuthService";
 
 export default {
   query,
   getById,
   remove,
   save,
-  handleUploadImage
+  handleUploadImage,
+  saveComment
 };
 
 function query(filter) {
-  console.log('query')
+  console.log("query");
   return HttpService.get(_getUrl(), filter);
 }
 
@@ -27,6 +29,16 @@ function save(post) {
   } else {
     return HttpService.post(_getUrl(), post);
   }
+}
+
+async function saveComment(postId, newCommentTxt) {
+  let comment = {
+    postId,
+    userId: AuthService.getLoggedInUser()._id,
+    txt: newCommentTxt,
+    timeStamp:  Date.now()
+  };
+   let res = await HttpService.put(_getUrl(`comment/${postId}`),comment)
 }
 
 async function handleUploadImage(file) {

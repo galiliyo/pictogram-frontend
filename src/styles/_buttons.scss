@@ -67,3 +67,12 @@ i.btn-icon{
   color: $hover-color;
   
 }
+
+.btn-link{
+  color: blue;
+  outline: none;
+  &.disabled{
+    color:$text-grey;
+    cursor:initial;
+  }
+}

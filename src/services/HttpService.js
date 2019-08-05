@@ -36,7 +36,6 @@ export default {
         return ajax(endpoint, 'POST', data)
     },
     put(endpoint, data) {
-        
         return ajax(endpoint, 'PUT', data)
     },
     delete(endpoint, data) {

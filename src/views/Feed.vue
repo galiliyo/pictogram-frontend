@@ -2,17 +2,21 @@
   <section class="feed">
     <div class="header">
       <AppHeader class="colorBg" @alertLoginFail="alertLoginFail()" />
-
     </div>
     <div class="main-container">
       <div class="posts-column">
-        <post v-for="(post,i) in posts" :post="post" :key="i">{{posts}}</post>
+        <post v-for="(post,i) in posts" :post="post" :loggedInUser="loggedInUser" :key="i">{{posts}}</post>
       </div>
       <div class="users-column"></div>
       <button class="btn-add" @click="goEdit">
         <span>+</span>
       </button>
     </div>
+    this.$notify({
+    group: 'foo',
+    title: 'Important message',
+    text: 'Hello user! This is a notification!'
+    });
   </section>
 </template>
 

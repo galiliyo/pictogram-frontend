@@ -35,7 +35,9 @@ p,
 label,
 input,
 pre,
-h6
+h6,
+span,
+.text-body,
 a {
   font-family: "Roboto", sans-serif;
   font-size: 1.1rem;
@@ -62,6 +64,10 @@ a {
 
 .light{
     font-weight: 300;
+}
+
+.heavy{
+  font-weight: 600
 }
 
 .tags, h6{

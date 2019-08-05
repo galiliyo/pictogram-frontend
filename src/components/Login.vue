@@ -52,8 +52,6 @@ export default {
         this.user = { email: "", pass: "" };
       } catch (err) {
         this.$parent.$emit('alertLoginFail');
-        console.log("no luck");
-
        
       }
     }
