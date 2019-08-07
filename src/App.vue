@@ -10,7 +10,6 @@
 
 
 <script>
-import SocketService from "./services/SocketService";
 export default {
   name: "App",
   data() {
@@ -18,10 +17,7 @@ export default {
     };
   },
   created() {
-    SocketService.on("welcome", txt => {
-      console.log(txt);
-      alert("txt arrive");
-    });
+   
   },
   computed: {},
   methods: {},
