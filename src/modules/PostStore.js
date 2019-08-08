@@ -1,8 +1,8 @@
 import PostService from "../services/PostService.js";
-import { log } from "util";
+import Vue from 'vue'
 
 export default {
-  // strict: true,
+  strict: true,
   state: {
     posts: [],
   },
@@ -10,11 +10,9 @@ export default {
     setPosts(state, { posts }) {
       state.posts = posts;
     },
-
     setloggedInUser(state, { posts }) {
       state.posts = posts;
     },
-
     remove(state, { id }) {
       const idx = state.posts.findIndex(currPost => currPost._id === id);
       state.posts.splice(idx, 1);
@@ -25,25 +23,27 @@ export default {
     },
     save(state, { post }) {
       state.posts.push(post);
+    },
+    addComment(state, {index, post}) {
+      Vue.set(state.posts, index, post )
     }
   },
   getters: {
     posts(state) {
       return state.posts;
-    }
-   
+    }   
   },
   actions: {
     async loadPosts(context, { filter }) {
       try {
         const posts = await PostService.query(filter);
         context.commit({ type: "setPosts", posts });
-        if (context.getters.loggedInUser) {
-          var ownerPosts = posts.filter(
-            post => post.owner._id === context.getters.loggedInUser._id
-          );
+        // if (context.getters.loggedInUser) {
+        //   var ownerPosts = posts.filter(
+        //     post => post.owner._id === context.getters.loggedInUser._id
+        //   );
           // context.commit({ type: "setOwnerPosts", ownerPosts });
-        }
+        // }
         return posts;
       } catch (err) {
         throw err;

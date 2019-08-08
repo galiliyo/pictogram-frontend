@@ -12,21 +12,10 @@
             <input type="text" v-model="post.title" placeholder="Title" required autofocus />
           </div>
         </label>
-<p>Camera</p>
-        <!-- <input type="file" accept="image/*" capture="camera"> -->
-        <Camera :requestAccess="true">
-          <div slot="capture" name="capture">snap</div>
-          <div slot="download" name="download">save</div>
-          <div slot="snap" name="snap">Take a pic</div>
-          <div slot="record" name="record">Record video</div>
-          <div name="stop">Stop recording</div>
-          <div name="pause">Pause recording</div>
-          <div name="resume">Resume recording</div>
-          <div name="reset">Reset all data (video/picture)</div>
-          <div name="close">Revoke access</div>
-          <div name="fullscreen">Toggle camera in fullscreen</div>
-          <div name="flip">Change camera type (front, back) if available</div>
-        </Camera>
+        <section class="stream" v-if="!captured">
+          <video ref="video" id="video" width="100%" height="500px" autoplay></video>
+        </section>
+        <section ref="canvas" id="canvas" width="100%" height="500px" v-else></section>
 
         <label>
           Upload Image
@@ -43,18 +32,18 @@
 
 
 <script>
-import { Camera, Microphone } from "vue-capture";
 import AppHeader from "../components/Header";
-import Login from "../components/Login";
+// import Login from "../components/Login";
 export default {
   data() {
     return {
+      video: {},
+      captured:false,
       post: {
         type: "",
         mediaURL: "",
         comments: [],
-        imgUrl:
-          "https://images.unsplash.com/photo-1562386130-926081dc4fbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+        imgUrl: "",
         likedBy: [],
         createdAt: "",
         hashTags: []
@@ -65,6 +54,19 @@ export default {
     const postId = this.$route.params.id;
     if (postId) {
       this.post = await this.$store.dispatch({ type: "getById", postId });
+    }
+  },
+  mounted() {
+    this.video = this.$refs.video;
+
+    this.canvas = this.$refs.canvas;
+
+    console.log(this.video);
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        this.video.srcObject = stream;
+        this.video.play;
+      });
     }
   },
   computed: {
@@ -79,7 +81,7 @@ export default {
     async uploadMedia() {
       const mediaFile = this.$refs.upload.files[0];
       // loading.io
-      if (file) {
+      if (mediaFile) {
         try {
           const url = await this.$store.dispatch({
             type: "uploadImg",
@@ -98,6 +100,8 @@ export default {
             type: "save",
             post: this.post
           });
+          console.log(newPost);
+          
         } catch (err) {
           console.log(err);
         }
@@ -116,17 +120,19 @@ export default {
             type: "save",
             post: this.post
           });
-          // this.$swal("Added Successfully", "", "success");
         } catch (err) {
-          // this.$swal("Check if login", "", "error");
+          console.log(err);
+          
         }
       }
       this.$router.push("/");
+    },
+    capture() {
+      // let context = this.canvas.getContext('2d').
     }
   },
   components: {
     AppHeader,
-    Camera
   }
 };
 </script>

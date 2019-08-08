@@ -1,5 +1,6 @@
 import AuthService from "../services/AuthService.js";
 import UserService from "../services/UserService.js";
+// import store from "../store.js";
 
 export default {
   state: {
@@ -20,9 +21,6 @@ export default {
       if (state.loggedInUser && state.loggedInUser._id === user._id)
         state.loggedInUser = user;
     },
-    setLikedPosts(state,{postId}){
-
-    }
   },
   getters: {
     loggedInUser(state) {
@@ -70,6 +68,10 @@ export default {
       // const loggedInUser = await AuthService.getLoggedInUser()
       // console.log('state.loggedInUser',postId, loggedInUser);
       let updatedUser = await UserService.toggleLike(postId)
+      console.log('updated user', updatedUser)
+     sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+      context.commit('setLoggedInUser', {user: updatedUser})
+      return updatedUser
       // context.commit({ type: "setLikedPosts", updatedUser });
       
       // if (loggedInUser.likedPosts.includes(id)) {
@@ -79,7 +81,7 @@ export default {
       // }
     },
 
-    async getUsers(context, { postId = allPosts }) {
+    async getUsers(context, { postId = 'allPosts' }) {
       const users = await UserService.query(postId);
       context.commit({ type: "setUsers", users });
     }

@@ -21,7 +21,7 @@
         <div class="user-actions">
           <i
             class="icon icon-love-it-circle btn-icon"
-            :class="{'liked': postLikedByUser }"
+            :class="{'liked': isPostLikedByUser }"
             @click="likePostToggle(post._id)"
           ></i>
           <i class="icon icon-megaphone btn-icon"></i>
@@ -33,17 +33,17 @@
       >Liked by {{post.likedBy.length}}</h6>
       <div class="px-3 pt-3">
         <span class="text-dark heavy text-body" v-if="owner">{{owner.firstName}} {{owner.lastName}}</span>
-        &nbsp{{post.txt}}
+        &nbsp;{{post.txt}}
         <span
           class="text-dark heavy"
           v-for="(tag,i) in post.tags"
           :key="i"
-        >&nbsp#{{tag}}</span>
+        >&nbsp;{{tag}}</span>
       </div>
       <h6 v-if="post.comments.length>0" class="px-3">{{post.comments.length}} comments</h6>
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
         <span class="text-dark heavy text-body">{{comment.ownerFullName}}</span>
-        <span>&nbsp {{comment.txt}}</span>
+        <span>&nbsp; {{comment.txt}}</span>
       </div>
 
       <hr />
@@ -68,7 +68,8 @@ export default {
   name: "post",
   props: {
     post: Object,
-    loggedInUser: Object
+    loggedInUser: Object,
+    index: Number
   },
   data() {
     return {
@@ -76,6 +77,16 @@ export default {
       newCommentTxt: "",
       postLikedByUser: null
     };
+  },
+  computed: {
+    isPostLikedByUser() {
+      return this.loggedInUser.likedPosts.includes(
+        this.post._id
+      );
+    },
+    commentBtnDisabled() {
+      return this.newCommentTxt === "";
+    }
   },
   async created() {
     if (this.loggedInUser) {
@@ -92,22 +103,28 @@ export default {
       }
     }
   },
-  computed: {
-    commentBtnDisabled() {
-      return this.newCommentTxt === "";
-    }
-  },
   methods: {
     goDetails() {},
     async likePostToggle() {
       await this.$store.dispatch({
         type: "toggleLikes",
-        postId: this.post._id
+        postId: this.post._id,
+        isLiked: this.isPostLikedByUser
       });
-      this.postLikedByUser = !this.postLikedByUser;
+      // this.postLikedByUser = !this.postLikedByUser;
     },
     saveComment: async function(postId) {
-      await PostService.saveComment(postId, this.newCommentTxt);
+      const data = await PostService.saveComment(postId, this.newCommentTxt);
+      console.log('res', data)
+      const updatedPost = {
+        ...this.post,
+        comments: [...this.post.comments, data]
+      }
+      this.$store.commit('addComment', {
+        index: this.index,
+        post: updatedPost
+      })
+      this.newCommentTxt = ''
     }
   },
   components: {}

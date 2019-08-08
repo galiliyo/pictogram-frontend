@@ -38,7 +38,7 @@ async function saveComment(postId, newCommentTxt) {
     txt: newCommentTxt,
     timeStamp:  Date.now()
   };
-   let res = await HttpService.put(_getUrl(`comment/${postId}`),comment)
+   return HttpService.put(_getUrl(`comment/${postId}`),comment)
 }
 
 async function handleUploadImage(file) {

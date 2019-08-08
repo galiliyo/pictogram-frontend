@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-content>
+      <notifications group="foo" />
       <router-view></router-view>
-    </v-content>
-   
+    </v-content>   
   </v-app>
 </template>
 
@@ -16,8 +16,9 @@ export default {
     return {
     };
   },
-  created() {
-   
+  async created() {
+    // const user = await AuthService.getLoggedInUser()
+    // console.log('user?', user)
   },
   computed: {},
   methods: {},

@@ -4,8 +4,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import '../src/styles/application.scss'
-import '../src/assets/fonts/streamline-icons/css/style.css'
+import './styles/application.scss'
+import './assets/fonts/streamline-icons/css/style.css'
 import * as VueGoogleMaps from "vue2-google-maps";
 import Notifications from 'vue-notification';
 
@@ -13,14 +13,14 @@ import Notifications from 'vue-notification';
 Vue.use(require('vue-moment'));
 Vue.use(Notifications)
 
-const options = {
-  // confirmButtonColor: '#41b882',
-  // cancelButtonColor: '#ff7674',
-  toast:true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 2000
-}
+// const options = {
+//   // confirmButtonColor: '#41b882',
+//   // cancelButtonColor: '#ff7674',
+//   toast:true,
+//   position: 'top-end',
+//   showConfirmButton: false,
+//   timer: 2000
+// }
 
 
 Vue.use(VueGoogleMaps, {
