@@ -26,9 +26,6 @@
           ></i>
           <i class="icon icon-megaphone btn-icon"></i>
         </div>
-        <div class="user-actions">
-          <i class="icon icon-megaphone btn-icon"></i>
-        </div>
       </div>
       <h6
         class="text-dark heavy px-3"
@@ -43,7 +40,7 @@
           :key="i"
         >&nbsp#{{tag}}</span>
       </div>
-      <h6 v-if="post.comments.length>0">{{post.comments.length}} comments</h6>
+      <h6 v-if="post.comments.length>0" class="px-3">{{post.comments.length}} comments</h6>
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
         <span class="text-dark heavy text-body">{{comment.ownerFullName}}</span>
         <span>&nbsp {{comment.txt}}</span>
@@ -104,9 +101,9 @@ export default {
     goDetails() {},
     async likePostToggle() {
       await this.$store.dispatch({
-          type: "toggleLikes",
-          postId: this.post._id
-        });
+        type: "toggleLikes",
+        postId: this.post._id
+      });
       this.postLikedByUser = !this.postLikedByUser;
     },
     saveComment: async function(postId) {
