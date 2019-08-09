@@ -1,6 +1,7 @@
 <template>
   <section class="post-edit">
     <AppHeader class="colorBg" />
+    <div  class="main-container">
     <Login v-if="loginModal" />
     <div class="edit-form-title">
       <h2 v-if="post._id">Edit</h2>
@@ -13,9 +14,10 @@
           </div>
         </label>
         <section class="stream" v-if="!captured">
-          <video ref="video" id="video" width="100%" height="500px" autoplay></video>
+          <video ref="video" id="video" width="100%"  autoplay></video>
+          <button @click="capture" class="btn-capture">Capture</button>
         </section>
-        <section ref="canvas" id="canvas" width="100%" height="500px" v-else></section>
+        <section ref="canvas" id="canvas" width="100%"  :class="(captured) ? 'show' : 'hide'"></section>
 
         <label>
           Upload Image
@@ -26,6 +28,7 @@
 
         <button>Save</button>
       </form>
+    </div>
     </div>
   </section>
 </template>
@@ -38,6 +41,8 @@ export default {
   data() {
     return {
       video: {},
+      canvas:{},
+      captures:[]  ,
       captured:false,
       post: {
         type: "",
@@ -110,7 +115,6 @@ export default {
             type: "updateUser",
             user: this.loggedInUser
           });
-          // this.$swal("Edit Successfully", "", "success");
         } catch (err) {
           console.log(err);
         }
@@ -128,7 +132,8 @@ export default {
       this.$router.push("/");
     },
     capture() {
-      // let context = this.canvas.getContext('2d').
+      let context = this.canvas.getContext('2d').drawImage(this.video,0,0,this.canvas.width,this.canvas.hight);
+      this.capture.push(canvas.toDataURL("image/png"))
     }
   },
   components: {

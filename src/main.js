@@ -8,7 +8,12 @@ import './styles/application.scss'
 import './assets/fonts/streamline-icons/css/style.css'
 import * as VueGoogleMaps from "vue2-google-maps";
 import Notifications from 'vue-notification';
-
+import Cloudinary from 'cloudinary-vue';
+Vue.use(Cloudinary, {
+  configuration: {
+    cloudName: "pictogramcloud"
+  }
+});
 
 Vue.use(require('vue-moment'));
 Vue.use(Notifications)

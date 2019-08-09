@@ -16,6 +16,7 @@
     </div>
 
     <v-img :src="post.mediaUrl" aspect-ratio="1.6"></v-img>
+
     <div class="post-info">
       <div class="controls flex space-between px-3 pt-2">
         <div class="user-actions">
@@ -56,7 +57,7 @@
       <button
         class="btn-link"
         @click="saveComment(post._id)"
-        :class="{'disabled' : commentBtnDisabled }"
+        :class="{'disabled' : isCommentBtnDisabled }"
       >Post</button>
     </div>
   </div>
@@ -80,11 +81,9 @@ export default {
   },
   computed: {
     isPostLikedByUser() {
-      return this.loggedInUser.likedPosts.includes(
-        this.post._id
-      );
+      return this.loggedInUser.likedPosts.includes(this.post._id);
     },
-    commentBtnDisabled() {
+    isCommentBtnDisabled() {
       return this.newCommentTxt === "";
     }
   },
@@ -104,7 +103,6 @@ export default {
     }
   },
   methods: {
-    goDetails() {},
     async likePostToggle() {
       await this.$store.dispatch({
         type: "toggleLikes",
@@ -115,16 +113,16 @@ export default {
     },
     saveComment: async function(postId) {
       const data = await PostService.saveComment(postId, this.newCommentTxt);
-      console.log('res', data)
+      console.log("res", data);
       const updatedPost = {
         ...this.post,
         comments: [...this.post.comments, data]
-      }
-      this.$store.commit('addComment', {
+      };
+      this.$store.commit("addComment", {
         index: this.index,
         post: updatedPost
-      })
-      this.newCommentTxt = ''
+      });
+      this.newCommentTxt = "";
     }
   },
   components: {}

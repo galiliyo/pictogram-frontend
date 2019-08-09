@@ -6,7 +6,7 @@
 }
 
 .colorBg {
-  background:  #7399fd;
+  background:  #10173a;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
   // position: absolute;
   // z-index: 30;
@@ -35,6 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color:white
 }
 .nav-links a {
   cursor: pointer;
@@ -45,8 +46,7 @@
 button {
   margin-left: 20px;
 }
-a {
-}
+
 .user-img {
   cursor: pointer;
   width: 30px;

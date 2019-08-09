@@ -17,8 +17,7 @@ export default {
     };
   },
   async created() {
-    // const user = await AuthService.getLoggedInUser()
-    // console.log('user?', user)
+ 
   },
   computed: {},
   methods: {},

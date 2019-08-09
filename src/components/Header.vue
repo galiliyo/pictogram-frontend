@@ -2,25 +2,23 @@
   <section class="nav" app :class="{ colorBg: colorBg }">
     <div class="navbar">
       <div class="logo">
-        <!-- <img src="../assets/img/logo/logo-dark.png" /> -->
+       
       </div>
-      <!-- <v-btn @click="showNotif('main', 'success')"></v-btn> -->
+     
       <div class="nav-links">
-        <button class="btn-link dark" v-if="loggedInUser" @click="logout">Logout</button>
-        <router-link v-if="!loggedInUser" to="/Signup">
-          <span class="dark">Signup</span>
-        </router-link>
-        <button class="btn-link dark" v-if="!loggedInUser" @click="showLoginModal">Login</button>
-        <router-link to="/about">
-          <span class="dark">About</span>
-        </router-link>
         <router-link to="/">
-          <span class="dark">Home</span>
+          <span class="nav-link">Home</span>
         </router-link>
+
+        <button  v-if="loggedInUser" class="btn-link "@click="logout">Logout</button>
+      
+
+        <button class="btn-link " v-else @click="showLoginModal">Login</button>
+        
         <img v-if="loggedInUser" @click="goUserProfile" class="user-img" :src="loggedInUser.imgUrl" />
       </div>
     </div>
-    <Login v-if="showLogin" />
+    <Login v-if="!loggedInUser" />
   </section>
 </template>
 

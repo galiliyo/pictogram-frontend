@@ -1,15 +1,20 @@
 <template>
   <section class="feed">
-
     <div class="header">
       <AppHeader class="colorBg" @alertLoginFail="alertLoginFail()" />
     </div>
     <div class="main-container">
       <div v-if="loggedInUser" class="posts-column">
-        <post v-for="(post,i) in posts" :post="post" :loggedInUser="loggedInUser" :key="i" :index="i">{{posts}}</post>
+        <post
+          v-for="(post,i) in posts"
+          :post="post"
+          :loggedInUser="loggedInUser"
+          :key="i"
+          :index="i"
+        >{{posts}}</post>
       </div>
       <div class="users-column"></div>
-      <button class="btn-add" @click="goEdit">
+      <button v-if="loggedInUser" class="btn-add" @click="goEdit">
         <span>+</span>
       </button>
     </div>
@@ -31,10 +36,11 @@ export default {
     this.loadPosts();
   },
   mounted() {
-     this.$notify({
-       group: 'foo',
-      title: 'Important message',
-      text: 'Hello user! This is a notification!'
+    this.$notify({
+      group: "foo",
+      class: "warning",
+      title: "Important message",
+      text: "Hello user! This is a notification!"
     });
   },
   computed: {
@@ -42,8 +48,7 @@ export default {
       return this.$store.getters.posts;
     },
     loggedInUser() {
-       return this.$store.getters.loggedInUser;
-      
+      return this.$store.getters.loggedInUser;
     }
   },
   methods: {
@@ -59,7 +64,7 @@ export default {
       }
     },
     goEdit() {
-      this.$router.push("/PostEdit");
+      this.$router.push("/Camera");
     },
     alertLoginFail() {
       console.log("aaaaa");

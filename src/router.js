@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Feed from "./views/Feed.vue";
 import PostEdit from "./views/PostEdit.vue";
+import Camera from "./views/Camera.vue";
 import Signup from "./views/Signup.vue";
 import UserProfile from "./views/UserProfile.vue";
 
@@ -43,15 +44,15 @@ let router= new Router({
       meta: {
         requiresAuth: false
       }
+    },
+    {
+      path: "/Camera",
+      name: "Camera",
+      component: Camera,
+      meta: {
+        requiresAuth: true
+      }
     }
-    // {
-    //   path: "/Login",
-    //   name: "Login",
-    //   component: Login,
-    //   meta: {
-    //     requiresAuth: false
-    //   }
-    // }
   ]
 });
 

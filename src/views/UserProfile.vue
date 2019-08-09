@@ -1,35 +1,34 @@
 <template>
   <section>
+    <section class="about">
+      <Header class="colorBg" />
+    </section>
 
-  <section class="about">
-    <Login v-if="loginModal" />
-    <Header class="colorBg" />
-  </section>
-
-  <section  class="about-page-wrapper" > 
-    
-  </section>
+    <section class="user-profile"></section>
   </section>
 </template>
 
 <script>
 import Header from "../components/Header";
-import Login from "../components/Login";
+
 export default {
+  name: "user profile",
+  created :{
+
+  },
   computed: {
-    loginModal() {
-      return this.$store.getters.loginModal;
+  loggedInUser() {
+      return this.$store.getters.loggedInUser;
     }
   },
   components: {
     Header,
-    Login,
+    Login
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../styles/views/_About.scss";
-
 </style>
 
