@@ -18,14 +18,6 @@ Vue.use(Cloudinary, {
 Vue.use(require('vue-moment'));
 Vue.use(Notifications)
 
-// const options = {
-//   // confirmButtonColor: '#41b882',
-//   // cancelButtonColor: '#ff7674',
-//   toast:true,
-//   position: 'top-end',
-//   showConfirmButton: false,
-//   timer: 2000
-// }
 
 
 Vue.use(VueGoogleMaps, {
@@ -36,7 +28,6 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false
-
 
 new Vue({
   router,

@@ -23,7 +23,6 @@ export default {
   },
   components: {
     Header,
-    Login
   }
 };
 </script>

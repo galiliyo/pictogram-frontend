@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest ../backend/public",
+    "build": "vue-cli-service build --dest ../pictogram-backend/public",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -17,6 +17,7 @@
     "moment": "^2.24.0",
     "register-service-worker": "^1.6.2",
     "socket.io-client": "^2.2.0",
+    "vee-validate": "^2.2.14",
     "vue-capture": "^0.1.7",
     "vue-country-select": "^0.2.2",
     "vue-moment": "^4.0.0",

@@ -2,11 +2,12 @@
   <section class="login-container">
     <div class="Login" v-if="mode==='login'">
       <h2 class="mb-4">Login</h2>
-      <form @submit.prevent="login" class="flex column">
+      <v-form @submit.prevent="login" class="flex column">
         <v-text-field
           label="E-mail"
           type="email"
           autofocus
+            :rules="[v => !!v || 'Item is required']"
           append-icon="email"
           color="deep-orange accent-3"
           minlength="3"
@@ -16,13 +17,14 @@
           label="Password"
           type="password"
           append-icon="lock"
+            :rules="[v => !!v || 'Item is required']"
           class="input-password"
           color="deep-orange accent-3"
           minlength="2"
           v-model="user.pass"
         />
         <button class="btn-main full-width mt-4 mb-2">Login</button>
-      </form>
+      </v-form>
       <p class="login-switch">
         Don't have an account?
         <span class="link" @click="mode='signup'">Signup</span>
@@ -30,7 +32,13 @@
     </div>
     <div v-else class="SignUp">
       <h2 class="mb-4">Signup</h2>
-      <form @submit.prevent="validate" class="flex column">
+      <v-form
+        @submit.prevent="validate"
+        class="flex column"
+        ref="form"
+        v-model="valid"
+        :lazy-validation="lazy"
+      >
         <v-text-field
           label="E-mail"
           type="email"
@@ -39,30 +47,50 @@
           append-icon="email"
           color="deep-orange accent-3"
           minlength="3"
-          v-model="user.email"
+          v-model="newUser.email"
+        />
+        <v-text-field
+          label="First Name"
+          type="text"
+          append-icon="user"
+          :rules="[v => !!v || 'Item is required']"
+          class="input-name"
+          color="deep-orange accent-3"
+          minlength="2"
+          v-model="newUser.firstName"
+        />
+        <v-text-field
+          label="Last Name"
+          type="test"
+          append-icon="user"
+          :rules="[v => !!v || 'Item is required']"
+          class="input-name"
+          color="deep-orange accent-3"
+          minlength="2"
+          v-model="newUser.lastName"
         />
         <v-text-field
           label="Password"
           type="password"
           append-icon="lock"
-          v:rules="passwordRules"
+          :rules="[v => !!v || 'Item is required']"
           class="input-password"
           color="deep-orange accent-3"
           minlength="2"
-          v-model="user.pass"
+          v-model="newUser.pass"
         />
         <v-text-field
           label="Confirm Password"
           type="password"
           append-icon="lock"
-          v:rules="passwordRules"
+          :rules="[passConfirm==newUser.pass || 'Passwords must match']"
           class="input-password"
           color="deep-orange accent-3"
           minlength="2"
           v-model="passConfirm"
         />
         <button class="btn-main full-width mt-4 mb-2">Sign Up</button>
-      </form>
+      </v-form>
       <p id="login-switch">
         Already have an account?
         <span class="link" @click="mode='login'">Login</span>
@@ -78,14 +106,20 @@ export default {
   data() {
     return {
       user: { email: "", pass: "" },
+      newUser: {
+        email: "",
+        pass: "",
+        firstName: "",
+        lastName: "",
+        imgUrl:
+          "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg",
+        likedPosts: []
+      },
       passConfirm: "",
       mode: "login",
       valid: true,
-      name: "",
-      passwordRules: [
-        v => !!v || "Password is required",
-        v => (v && this.passConfirm === this.user.pass) || "Passwords must match"
-      ]
+      lazy: true,
+      name: ""
     };
   },
   computed: {
@@ -95,20 +129,46 @@ export default {
   },
   methods: {
     async login() {
-      // loading.io
       try {
         await this.$store.dispatch({ type: "login", user: this.user });
-        this.user = { email: "", pass: "" };
       } catch (err) {
-        this.$parent.$emit("alertLoginFail");
+        console.log(err);
+        
+        this.$notify({
+          type: "error",
+          title: "Login failed",
+          text: "Wrong user name or password",
+          duration : 4000
+          
+        });
       }
     },
     validate() {
       if (this.$refs.form.validate()) {
-        // this.snackbar = true;
+        this.signup();
       }
     },
-    signup() {}
+    async signup() {
+      try {
+        await this.$store.dispatch({
+          type: "signup",
+          userCredential: this.newUser
+        });
+        this.$notify({
+          title: "Success!",
+          text: "User account created successfuly",
+          type: "success",
+          
+        });
+      } catch (err) {
+        this.$notify({
+          title: "Signup Failed",
+          text: err.response.data.error,
+          type: "warning",
+          
+        });
+      }
+    }
   }
 };
 </script>

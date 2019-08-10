@@ -36,12 +36,7 @@ export default {
     this.loadPosts();
   },
   mounted() {
-    this.$notify({
-      group: "foo",
-      class: "warning",
-      title: "Important message",
-      text: "Hello user! This is a notification!"
-    });
+   
   },
   computed: {
     posts() {
@@ -67,7 +62,6 @@ export default {
       this.$router.push("/Camera");
     },
     alertLoginFail() {
-      console.log("aaaaa");
       this.alert = true;
     }
   },

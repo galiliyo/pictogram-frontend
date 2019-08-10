@@ -472,7 +472,7 @@
           w(), (f = !1)
         },
         W = function(e) {
-          ;(f = !0), p && (O(), e && e.files && H(l))
+          (f = !0), p && (O(), e && e.files && H(l))
         },
         M = function() {
           f && p && !v && E(!t.matches)
@@ -500,7 +500,7 @@
           var e = self.document
           try {
             e = self.top.document
-          } catch (e) {}
+          } catch (e) {console.log(e)}
           return e
         })()
         var n,
@@ -804,7 +804,7 @@
                       a()
                   }),
                   (a = function() {
-                    ;(o = null),
+                    (o = null),
                       u.removeEventListener('load', r, !1),
                       u.removeEventListener('error', s, !1),
                       d.length && c(d.shift())
@@ -815,7 +815,7 @@
                       a()
                   }),
                   (c = function(e) {
-                    ;(o = e),
+                    (o = e),
                       u.addEventListener('load', r, !1),
                       u.addEventListener('error', s, !1),
                       e.readAs === be
@@ -1063,7 +1063,7 @@
           return (n = 0 !== n.indexOf('http') ? e + n : n)
         })()),
         (t = new Promise(Y.bind(null, g, n))).then(function(e) {
-          ;(s = e.isWidgetShowing),
+          (s = e.isWidgetShowing),
             (c = e.isWidgetMinimized),
             (d = K(
               g,

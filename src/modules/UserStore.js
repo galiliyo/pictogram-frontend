@@ -37,6 +37,7 @@ export default {
       }
     },
     async signup(context, { userCredential }) {
+      console.log('userCredential :', userCredential);
       try {
         const loggedInUser = await AuthService.signup(userCredential);
         context.commit({ type: "setLoggedInUser", user: loggedInUser });

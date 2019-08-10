@@ -1,20 +1,30 @@
 <template>
-  <section class="nav" app :class="{ colorBg: colorBg }">
-    <div class="navbar">
-      <div class="logo">
-       
+  <section class="nav" :class="{ colorBg: colorBg }">
+    <div class="navbar flex">
+      <div class="logo"></div>
+
+      <div v-if="loggedInUser" class="search-field mt-3">
+        <v-text-field
+          placeholder="Search"
+          height="24"
+          clearable
+          flat
+          solo
+          prepend-inner-icon="search"
+          single-line
+          @keyup="setFilter($event)"
+          @click:clear="setFilter($event)"
+        ></v-text-field>
       </div>
-     
       <div class="nav-links">
         <router-link to="/">
           <span class="nav-link">Home</span>
         </router-link>
 
-        <button  v-if="loggedInUser" class="btn-link "@click="logout">Logout</button>
-      
+        <button v-if="loggedInUser" class="btn-link" @click="logout">Logout</button>
 
-        <button class="btn-link " v-else @click="showLoginModal">Login</button>
-        
+        <button class="btn-link" v-else @click="showLoginModal">Login</button>
+
         <img v-if="loggedInUser" @click="goUserProfile" class="user-img" :src="loggedInUser.imgUrl" />
       </div>
     </div>
@@ -26,6 +36,7 @@
 <script>
 import Login from "../components/Login";
 export default {
+  name: "Header",
   data() {
     return {
       showLogin: false,
@@ -47,6 +58,23 @@ export default {
     },
     showLoginModal() {
       this.showLogin = true;
+    },
+    setFilter(e) {
+      // console.log(e.target.value);
+      this.loadPosts(e.target.value);
+    },
+    async loadPosts(filter = {}) {
+      console.log("load posts", filter);
+      try {
+        let p = await this.$store.dispatch({
+          type: "loadPosts",
+          filter
+        });
+        console.log(p);
+        
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   props: {

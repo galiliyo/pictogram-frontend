@@ -79,9 +79,8 @@ export default {
         this.$router.push("/");
         //todo notification success
       } catch (err) {
-        // swal
+      
         this.$router.push("/");
-        // this.$swal("Email exsits, please Login", "", "error");
       }
     }
   },
