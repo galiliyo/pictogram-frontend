@@ -1,0 +1,13 @@
+.drop-menu {
+  padding: 0.8rem 0 0.4rem;
+  background: #fff;
+}
+p.list-item {
+  padding: 0.2rem 1.2rem 0.4rem;
+  margin: 0;
+  line-height: 1.8 rem;
+  cursor: pointer;
+  &:hover {
+    background: lightblue;
+  }
+}

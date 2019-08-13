@@ -10,9 +10,10 @@ export default {
   saveComment
 };
 
-function query(filter) {
-  console.log("query");
-  return HttpService.get(_getUrl(), filter);
+function query(params) {
+  console.log('params @ query',params);
+  
+  return HttpService.get(_getUrl(), params);
 }
 
 function getById(id) {

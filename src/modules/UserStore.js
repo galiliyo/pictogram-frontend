@@ -37,7 +37,6 @@ export default {
       }
     },
     async signup(context, { userCredential }) {
-      console.log('userCredential :', userCredential);
       try {
         const loggedInUser = await AuthService.signup(userCredential);
         context.commit({ type: "setLoggedInUser", user: loggedInUser });
@@ -66,20 +65,11 @@ export default {
       }
     },
     async toggleLikes(context,   {postId} ) {
-      // const loggedInUser = await AuthService.getLoggedInUser()
-      // console.log('state.loggedInUser',postId, loggedInUser);
       let updatedUser = await UserService.toggleLike(postId)
       console.log('updated user', updatedUser)
      sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
       context.commit('setLoggedInUser', {user: updatedUser})
       return updatedUser
-      // context.commit({ type: "setLikedPosts", updatedUser });
-      
-      // if (loggedInUser.likedPosts.includes(id)) {
-      //   console.log("user liked", id);
-      // } else {
-      //   console.log("user disliked", id);
-      // }
     },
 
     async getUsers(context, { postId = 'allPosts' }) {

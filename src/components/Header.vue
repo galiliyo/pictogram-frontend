@@ -60,18 +60,22 @@ export default {
       this.showLogin = true;
     },
     setFilter(e) {
-      // console.log(e.target.value);
+      this.$store.commit({
+        type: "setKeyword",
+        keyword: e.target.value
+      });
       this.loadPosts(e.target.value);
     },
-    async loadPosts(filter = {}) {
-      console.log("load posts", filter);
+    async loadPosts(keyword = {}) {
+      console.log("load posts", keyword);
+
+      let params = { keyword };
       try {
-        let p = await this.$store.dispatch({
+        let postsRes = await this.$store.dispatch({
           type: "loadPosts",
-          filter
+          params
         });
-        console.log(p);
-        
+        console.log("postsRes", postsRes);
       } catch (err) {
         console.log(err);
       }

@@ -11,6 +11,7 @@
           :loggedInUser="loggedInUser"
           :key="i"
           :index="i"
+          :keyword="keyword"
         >{{posts}}</post>
       </div>
       <div class="users-column"></div>
@@ -23,17 +24,20 @@
 
 
 <script>
+import cloudinary from 'cloudinary-vue';
 import AppHeader from "../components/Header";
 import Post from "../components/Post";
 
 export default {
   data() {
     return {
-      alert: false
+      // alert: false,
+   
     };
   },
   created() {
     this.loadPosts();
+    // this.keyword = this.$store.getters.loggedInUser
   },
   mounted() {
    
@@ -44,16 +48,18 @@ export default {
     },
     loggedInUser() {
       return this.$store.getters.loggedInUser;
+    },
+    keyword(){
+      return this.$store.getters.keyword
     }
   },
   methods: {
     async loadPosts(filter = {}) {
       try {
-        let p = await this.$store.dispatch({
+        await this.$store.dispatch({
           type: "loadPosts",
           filter
         });
-        console.log("load posts", p);
       } catch (err) {
         console.log(err);
       }

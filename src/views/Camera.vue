@@ -90,7 +90,7 @@ export default {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
+      
           this.post.mediaUrl = result.info.secure_url;
           myWidget.hide();
         }
@@ -172,7 +172,6 @@ export default {
   },
 
   components: {
-    AppHeader
   }
 };
 </script>

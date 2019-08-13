@@ -1,17 +1,21 @@
 <template>
-  <div class="post card mb-3">
-    <div v-if="owner" class="post-header pa-2">
+  <div v-if="owner" class="post card mb-3">
+    <div class="post-header pa-2 flex space-between">
       <div class="top-row flex">
-        <v-avatar class="avatar mr-3" :size="48">
-          <img v-if="owner.imgUrl" :src="owner.imgUrl" alt="avatar" />
-        </v-avatar>
-        <div class="header-txt">
-          <h6>{{owner.firstName}} {{owner.lastName}}</h6>
-          <span>
-            <i class="icon icon-pin-location-1"></i>
-          </span>
-          <span class="text-grey">image location</span>
+        <div class="flex">
+          <v-avatar class="avatar mr-3" :size="48">
+            <img v-if="owner" :src="owner.imgUrl" alt="avatar" />
+          </v-avatar>
+          <div class="header-txt">
+            <h6>{{owner.firstName}} {{owner.lastName}}</h6>
+            <span>
+              <i class="icon icon-pin-location-1"></i>
+            </span>
+            <span class="text-grey">image location</span>
+          </div>
         </div>
+
+        <drop-menu :items="items" @select="select"></drop-menu>
       </div>
     </div>
 
@@ -34,17 +38,18 @@
       >Liked by {{post.likedBy.length}}</h6>
       <div class="px-3 pt-3">
         <span class="text-dark heavy text-body" v-if="owner">{{owner.firstName}} {{owner.lastName}}</span>
-        &nbsp;{{post.txt}}
+        <p v-html="highlight(post.txt ,keyword)"></p>
         <span
           class="text-dark heavy"
           v-for="(tag,i) in post.tags"
           :key="i"
-        >&nbsp;{{tag}}</span>
+          v-html="highlight(tag ,keyword)"
+        ></span>
       </div>
       <h6 v-if="post.comments.length>0" class="px-3">{{post.comments.length}} comments</h6>
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
-        <span class="text-dark heavy text-body">{{comment.ownerFullName}}</span>
-        <span>&nbsp; {{comment.txt}}</span>
+        <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
+        <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
       </div>
 
       <hr />
@@ -55,7 +60,7 @@
         v-model="newCommentTxt"
       />
       <button
-        class="btn-link"
+        class="btn-post"
         @click="saveComment(post._id)"
         :class="{'disabled' : isCommentBtnDisabled }"
       >Post</button>
@@ -65,18 +70,21 @@
 
 <script>
 import PostService from "../services/PostService";
+import DropMenu from "./DropMenu";
 export default {
   name: "post",
   props: {
     post: Object,
     loggedInUser: Object,
-    index: Number
+    index: Number,
+    keyword: String
   },
   data() {
     return {
       owner: null,
       newCommentTxt: "",
-      postLikedByUser: null
+      postLikedByUser: null,
+      items: [{ title: "Edit" }, { title: "Delete" }]
     };
   },
   computed: {
@@ -98,22 +106,35 @@ export default {
           id: this.post.owner._id
         });
       } catch (err) {
-        console.log(err);
+        console.log("could not get owener", err);
       }
     }
   },
   methods: {
+    select(value) {
+      if (value === "Delete") this.deletePost();
+    },
+    async deletePost() {
+      try {
+        await this.$store.dispatch({
+          type: "remove",
+          post: this.post
+        });
+      } catch (err) {
+        console.log("could not delete", err);
+      }
+    },
+
     async likePostToggle() {
       await this.$store.dispatch({
         type: "toggleLikes",
         postId: this.post._id,
         isLiked: this.isPostLikedByUser
       });
-      // this.postLikedByUser = !this.postLikedByUser;
     },
     saveComment: async function(postId) {
+      if (this.newCommentTxt === "") return;
       const data = await PostService.saveComment(postId, this.newCommentTxt);
-      console.log("res", data);
       const updatedPost = {
         ...this.post,
         comments: [...this.post.comments, data]
@@ -123,9 +144,20 @@ export default {
         post: updatedPost
       });
       this.newCommentTxt = "";
+    },
+
+    highlight(txt, keyword) {
+      if (keyword.length < 2) return txt;
+      var iQuery = new RegExp(keyword, "ig");
+      return txt.toString().replace(iQuery, function(matchedTxt) {
+        return `<span style="background: yellow">${matchedTxt}</span>`;
+      });
     }
   },
-  components: {}
+
+  components: {
+    DropMenu
+  }
 };
 </script>
 
