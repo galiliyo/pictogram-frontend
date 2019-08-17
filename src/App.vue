@@ -1,27 +1,36 @@
 <template>
   <v-app>
     <v-content>
-      <notifications position="bottom center" classes="notifications"  />
+      <notifications position="bottom center" classes="notifications" />
       <router-view></router-view>
-    </v-content>   
+    </v-content>
+    <Bottom-Nav v-if="isMobile"></Bottom-Nav>
   </v-app>
 </template>
 
 
 
 <script>
+import BottomNav from "./components/BottomNav";
 export default {
   name: "App",
   data() {
-    return {
-    };
+    return {};
   },
-  async created() {
- 
+  created() {
+    this.$store.commit("setDisplayMode");
   },
-  computed: {},
+  computed: {
+    isMobile() {
+     let is= this.$store.getters.isMobile;
+      console.log('isMobile',is);
+      return is
+    }
+  },
   methods: {},
-  components: {}
+  components: {
+    BottomNav
+  }
 };
 </script>
 

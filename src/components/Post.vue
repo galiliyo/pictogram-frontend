@@ -1,4 +1,6 @@
 <template>
+  <!-- FIXME why not working from edit?? -->
+  <!-- <div>  post{{post}} -->
   <div v-if="owner" class="post card mb-3">
     <div class="post-header pa-2 flex space-between">
       <div class="top-row flex">
@@ -15,11 +17,11 @@
           </div>
         </div>
 
-        <drop-menu :items="items" @select="select"></drop-menu>
+        <drop-menu v-if="loggedInUser._id === post.owner._id" :items="items" @select="select"></drop-menu>
       </div>
     </div>
 
-    <v-img :src="post.mediaUrl" aspect-ratio="1.6"></v-img>
+    <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
 
     <div class="post-info">
       <div class="controls flex space-between px-3 pt-2">
@@ -29,7 +31,7 @@
             :class="{'liked': isPostLikedByUser }"
             @click="likePostToggle(post._id)"
           ></i>
-          <i class="icon icon-megaphone btn-icon"></i>
+          <i class="icon icon-megaphone btn-icon" @click="share"></i>
         </div>
       </div>
       <h6
@@ -37,34 +39,38 @@
         v-show="post.likedBy.length>0"
       >Liked by {{post.likedBy.length}}</h6>
       <div class="px-3 pt-3">
-        <span class="text-dark heavy text-body" v-if="owner">{{owner.firstName}} {{owner.lastName}}</span>
+  
         <p v-html="highlight(post.txt ,keyword)"></p>
         <span
-          class="text-dark heavy"
+          class="text-dark heavy tag mr-1 "
           v-for="(tag,i) in post.tags"
           :key="i"
           v-html="highlight(tag ,keyword)"
         ></span>
       </div>
-      <h6 v-if="post.comments.length>0" class="px-3">{{post.comments.length}} comments</h6>
+      <p v-if="post.comments.length>1" class="px-3 mt-3">
+        {{post.comments.length}} comments</p>
+
+    <p v-else-if="post.comments.length===1" class="px-3 mt-3">
+        {{post.comments.length}} comment</p>
+
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
         <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
         <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
       </div>
-
-      <hr />
-      <input
-        class="input-comment px-3 py-2"
-        placeholder="Add comment"
-        type="text"
-        v-model="newCommentTxt"
-      />
-      <button
-        class="btn-post"
-        @click="saveComment(post._id)"
-        :class="{'disabled' : isCommentBtnDisabled }"
-      >Post</button>
     </div>
+    <hr />
+    <input
+      class="input-comment px-3 py-2"
+      placeholder="Add comment"
+      type="text"
+      v-model="newCommentTxt"
+    />
+    <button
+      class="btn-post"
+      @click="saveComment(post._id)"
+      :class="{'disabled' : isCommentBtnDisabled }"
+    >Post</button>
   </div>
 </template>
 
@@ -106,7 +112,7 @@ export default {
           id: this.post.owner._id
         });
       } catch (err) {
-        console.log("could not get owener", err);
+        console.log("could not get owenr", err);
       }
     }
   },
@@ -145,13 +151,27 @@ export default {
       });
       this.newCommentTxt = "";
     },
-
+    gotoPost() {
+      this.$router.push(`/PostEdit/${this.post._id}`);
+    },
     highlight(txt, keyword) {
       if (keyword.length < 2) return txt;
       var iQuery = new RegExp(keyword, "ig");
       return txt.toString().replace(iQuery, function(matchedTxt) {
         return `<span style="background: yellow">${matchedTxt}</span>`;
       });
+    },
+    share() {
+      navigator
+        .share({
+          title: `Check out this Pictogram by ${this.post.owner.firstName}`,
+          text: "",
+          url: "https://en.wikipedia.org/wiki/Typhoon_Lekima_(2019)"
+        })
+        .then(_ => console.log("Yay, you shared it :)"))
+        .catch(error =>
+          console.log("Oh noh! You couldn't share it! :'(\n", error)
+        );
     }
   },
 

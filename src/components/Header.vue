@@ -1,7 +1,7 @@
 <template>
   <section class="nav" :class="{ colorBg: colorBg }">
     <div class="navbar flex">
-      <div class="logo"></div>
+      <div > <img class="logo" src="../assets/img/logo/Pictogram-white.svg" alt=""></div>
 
       <div v-if="loggedInUser" class="search-field mt-3">
         <v-text-field

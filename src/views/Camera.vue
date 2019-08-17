@@ -34,7 +34,6 @@
 
 <script>
 import AppHeader from "../components/Header";
-// import Login from "../components/Login";
 export default {
   name: "Camera",
   data() {

@@ -12,19 +12,19 @@
           :key="i"
           :index="i"
           :keyword="keyword"
-        >{{posts}}</post>
+        ></post>
       </div>
       <div class="users-column"></div>
       <button v-if="loggedInUser" class="btn-add" @click="goEdit">
         <span>+</span>
       </button>
     </div>
+   
   </section>
 </template>
 
 
 <script>
-import cloudinary from 'cloudinary-vue';
 import AppHeader from "../components/Header";
 import Post from "../components/Post";
 
@@ -32,16 +32,12 @@ export default {
   data() {
     return {
       // alert: false,
-   
     };
   },
   created() {
     this.loadPosts();
-    // this.keyword = this.$store.getters.loggedInUser
   },
-  mounted() {
-   
-  },
+  mounted() {},
   computed: {
     posts() {
       return this.$store.getters.posts;
@@ -49,8 +45,8 @@ export default {
     loggedInUser() {
       return this.$store.getters.loggedInUser;
     },
-    keyword(){
-      return this.$store.getters.keyword
+    keyword() {
+      return this.$store.getters.keyword;
     }
   },
   methods: {
@@ -64,6 +60,7 @@ export default {
         console.log(err);
       }
     },
+    
     goEdit() {
       this.$router.push("/Camera");
     },
