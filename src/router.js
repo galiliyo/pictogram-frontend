@@ -20,7 +20,7 @@ let router= new Router({
     },
 
     {
-      path: "/PostEdit/:id?",
+      path: "/PostEdit/:id",
       name: "PostEdit",
       component: PostEdit,
       meta: {
@@ -37,14 +37,14 @@ let router= new Router({
       }
     },
 
-    {
-      path: "/Signup",
-      name: "Signup",
-      component: Signup,
-      meta: {
-        requiresAuth: false
-      }
-    },
+    // {
+    //   path: "/Signup",
+    //   name: "Signup",
+    //   component: Signup,
+    //   meta: {
+    //     requiresAuth: false
+    //   }
+    // },
     {
       path: "/Camera",
       name: "Camera",

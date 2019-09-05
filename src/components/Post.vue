@@ -1,26 +1,29 @@
 <template>
-  <!-- FIXME why not working from edit?? -->
-  <!-- <div>  post{{post}} -->
-  <div v-if="owner" class="post card mb-3">
-    <div class="post-header pa-2 flex space-between">
+  <div v-if="post && loggedInUser" class="post card mb-3">
+   
+  <div class="post-header pa-2 flex space-between">
       <div class="top-row flex">
         <div class="flex">
           <v-avatar class="avatar mr-3" :size="48">
             <img v-if="owner" :src="owner.imgUrl" alt="avatar" />
           </v-avatar>
           <div class="header-txt">
-            <h6>{{owner.firstName}} {{owner.lastName}}</h6>
+            <h6 >{{post.owner.firstName}} {{post.owner.lastName}}</h6>
             <span>
-              <i class="icon icon-pin-location-1"></i>
+              <i class="icon clock-outline"></i>
             </span>
-            <span class="text-grey">image location</span>
+            <span class="text-grey">{{post.createdAt }}</span>
           </div>
         </div>
 
-        <drop-menu v-if="loggedInUser._id === post.owner._id" :items="items" @select="select"></drop-menu>
+        <drop-menu
+          v-if="post && loggedInUser && loggedInUser._id === post.owner._id"
+          :items="items"
+          @select="select"
+        ></drop-menu>
       </div>
     </div>
-
+ 
     <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
 
     <div class="post-info">
@@ -35,25 +38,23 @@
         </div>
       </div>
       <h6
+        v-if="post"
         class="text-dark heavy px-3"
         v-show="post.likedBy.length>0"
       >Liked by {{post.likedBy.length}}</h6>
       <div class="px-3 pt-3">
-  
         <p v-html="highlight(post.txt ,keyword)"></p>
         <span
-          class="text-dark heavy tag mr-1 "
+          class="text-dark heavy tag mr-1"
           v-for="(tag,i) in post.tags"
           :key="i"
           v-html="highlight(tag ,keyword)"
         ></span>
       </div>
-      <p v-if="post.comments.length>1" class="px-3 mt-3">
-        {{post.comments.length}} comments</p>
-
-    <p v-else-if="post.comments.length===1" class="px-3 mt-3">
-        {{post.comments.length}} comment</p>
-
+      <div v-if="post">
+        <p v-if="post.comments.length>1" class="px-3 mt-3">{{post.comments.length}} comments</p>
+        <p v-else-if="post.comments.length===1" class="px-3 mt-3">{{post.comments.length}} comment</p>
+      </div>
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
         <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
         <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
@@ -100,6 +101,9 @@ export default {
     isCommentBtnDisabled() {
       return this.newCommentTxt === "";
     }
+  },
+  date() {
+    return this.post.createdAt;
   },
   async created() {
     if (this.loggedInUser) {
@@ -172,6 +176,11 @@ export default {
         .catch(error =>
           console.log("Oh noh! You couldn't share it! :'(\n", error)
         );
+    }
+  },
+  filters: {
+    moment: function(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
     }
   },
 

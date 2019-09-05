@@ -7,22 +7,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: true,
-  state: {
-    isMobile: undefined
-  },
-  mutations: {
-    setDisplayMode(state){
-      state.isMobile = !!navigator.userAgent.match(
-        /(iPhone|iPod|iPad|Android|webOS|BlackBerry|IEMobile|Opera Mini)/i
-      )
-    }
-
-  },
-  getters: {
-    isMobile(state) {
-      return state.isMobile
-    }
-  },
+  state: {},
+  mutations: {},
+  getters: {},
   actions: {},
   modules: {
     PostStore,

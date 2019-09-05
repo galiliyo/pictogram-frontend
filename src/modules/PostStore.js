@@ -75,6 +75,7 @@ export default {
       }
     },
     async save(context, { post }) {
+      
       if (post._id) {
         try {
           const updatedPost = await PostService.save(post)
@@ -85,6 +86,8 @@ export default {
         }
       } else {
         try {
+          console.log('saving post',post);
+          
           const newPost = await PostService.save(post)
           context.commit({ type: 'save', post: newPost })
           return newPost

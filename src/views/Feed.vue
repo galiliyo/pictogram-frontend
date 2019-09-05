@@ -3,7 +3,7 @@
     <div class="header">
       <AppHeader class="colorBg" @alertLoginFail="alertLoginFail()" />
     </div>
-    <div class="main-container">
+    <div class="main-container" :class="{background: !loggedInUser}">
       <div v-if="loggedInUser" class="posts-column">
         <post
           v-for="(post,i) in posts"
@@ -19,7 +19,6 @@
         <span>+</span>
       </button>
     </div>
-   
   </section>
 </template>
 
@@ -60,7 +59,7 @@ export default {
         console.log(err);
       }
     },
-    
+
     goEdit() {
       this.$router.push("/Camera");
     },

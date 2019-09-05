@@ -25,7 +25,7 @@
         v-model="tagsStr"
         required
       />
-     
+
       <button @click="save" class="btn-main">Save</button>
     </div>
   </section>
@@ -44,8 +44,7 @@ export default {
         mediaUrl: "",
         comments: [],
         likedBy: [],
-        createdAt: "",
-        hashTags: []
+        createdAt: ""
       },
       tagsStr: ""
     };
@@ -89,7 +88,6 @@ export default {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-      
           this.post.mediaUrl = result.info.secure_url;
           myWidget.hide();
         }
@@ -107,8 +105,8 @@ export default {
     hideCamera() {
       return this.post.mediaUrl != "";
     },
-    tags(){
-       return this.tagsStr.split(",")
+    tags() {
+      return this.tagsStr.split(",");
     }
   },
   methods: {
@@ -153,11 +151,10 @@ export default {
         }
       );
     },
-   
 
     async save() {
-      this.post.tags = this.tagsStr.split(",");
-     
+      this.post.tags = Array.from(new Set(this.tagsStr.split(",")));
+
       try {
         await this.$store.dispatch({
           type: "save",
@@ -170,8 +167,7 @@ export default {
     }
   },
 
-  components: {
-  }
+  components: {}
 };
 </script>
 

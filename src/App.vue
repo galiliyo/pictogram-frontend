@@ -18,7 +18,7 @@ export default {
     return {};
   },
   created() {
-    this.$store.commit("setDisplayMode");
+
   },
   computed: {
     isMobile() {
