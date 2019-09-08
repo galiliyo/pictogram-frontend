@@ -1,9 +1,9 @@
 <template>
   <section class="post-edit">
+   
     <AppHeader class="colorBg" />
-    <div class="main-container">
-    
-      <Post  :post="post" :loggedInUser="loggedInUser"></Post>
+    <div v-if="post" class="main-container">
+      <Post :post="post" :loggedInUser="loggedInUser"></Post>
     </div>
   </section>
 </template>
@@ -22,8 +22,7 @@ export default {
     const postId = this.$route.params.id;
 
     this.post = await this.$store.dispatch({ type: "getById", postId });
-    console.log('post',this.post)
-    
+    console.log("post", this.post);
   },
   mounted() {},
   computed: {

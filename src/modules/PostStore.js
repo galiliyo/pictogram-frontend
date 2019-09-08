@@ -29,8 +29,8 @@ export default {
       Vue.set(state.posts, index, post)
     },
     setKeyword(state, { keyword }) {
-      console.log('keyword',keyword);
-      
+      console.log('keyword', keyword)
+
       state.keyword = keyword
     }
   },
@@ -38,7 +38,11 @@ export default {
     posts(state) {
       return state.posts
     },
-    keyword (state){
+    postById(state, { postId }) {
+      let post = state.posts.find(currPost => currPost._id === postId)
+      return post
+    },
+    keyword(state) {
       return state.keyword
     }
   },
@@ -75,7 +79,6 @@ export default {
       }
     },
     async save(context, { post }) {
-      
       if (post._id) {
         try {
           const updatedPost = await PostService.save(post)
@@ -86,8 +89,8 @@ export default {
         }
       } else {
         try {
-          console.log('saving post',post);
-          
+          console.log('saving post', post)
+
           const newPost = await PostService.save(post)
           context.commit({ type: 'save', post: newPost })
           return newPost

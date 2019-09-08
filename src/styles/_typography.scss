@@ -2,9 +2,8 @@ h1,
 h2,
 h3,
 h4,
-h5,
-{
-  font-family: "Raleway";
+h5 {
+  font-family: 'Raleway';
   font-size: 2.4rem;
   color: $text-dark;
 }
@@ -25,10 +24,9 @@ h4 {
 }
 
 h5 {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
-  
 }
 
 p,
@@ -37,16 +35,14 @@ input,
 pre,
 h6,
 span,
-.text-body,
-{
-  font-family: "Roboto", sans-serif;
+.text-body {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
- 
 }
 .text-dark {
-    color: $text-dark;
-  }
-  
+  color: $text-dark;
+}
+
 .text-grey {
   color: $text-grey;
 }
@@ -60,23 +56,22 @@ span,
   font-weight: normal;
 }
 
-
-
-.light{
-    font-weight: 300;
+.light {
+  font-weight: 300;
 }
 
-.heavy{
-  font-weight: 600
+.heavy {
+  font-weight: 600;
 }
 
-.tags, h6{
+.tags,
+h6 {
   font-size: 1.1rem;
   font-weight: 700;
   color: $text-dark;
 }
 
-.icon{
+.icon {
   color: $text-dark;
   size: 1.1rem;
   margin-right: 0.4rem;

@@ -1,66 +1,71 @@
 <template>
-  <div v-if="post && loggedInUser" class="post card mb-3">
-   
-  <div class="post-header pa-2 flex space-between">
-      <div class="top-row flex">
-        <div class="flex">
-          <v-avatar class="avatar mr-3" :size="48">
-            <img v-if="owner" :src="owner.imgUrl" alt="avatar" />
-          </v-avatar>
-          <div class="header-txt">
-            <h6 >{{post.owner.firstName}} {{post.owner.lastName}}</h6>
-            <span>
-              <i class="icon clock-outline"></i>
-            </span>
-            <span class="text-grey">{{post.createdAt }}</span>
+  <div>
+    <div v-if="!post || !post.owner">Loading...</div>
+    <div v-if="post && post.owner && loggedInUser" class="post card mb-3">
+      <div class="post-header pa-2 flex space-between">
+        <div class="top-row flex">
+          <div class="flex">
+            <v-avatar class="avatar mr-3" :size="48">
+              <img v-if="owner" :src="owner.imgUrl" alt="avatar" />
+            </v-avatar>
+            <div class="header-txt">
+              <h6 v-if="post.owner">{{post.owner.firstName}} {{post.owner.lastName}}</h6>
+              <span>
+                <i class="icon clock-outline"></i>
+              </span>
+              <span class="text-grey">{{post.createdAt }}</span>
+            </div>
+          </div>
+
+          <drop-menu
+            v-if="post && post.owner && loggedInUser && loggedInUser._id === post.owner._id"
+            :items="items"
+            @select="select"
+          ></drop-menu>
+        </div>
+      </div>
+
+      <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
+
+      <div class="post-info">
+        <div class="controls flex space-between px-3 pt-2">
+          <div class="user-actions">
+            <i
+              class="icon icon-love-it-circle-2 btn-icon"
+              :class="{'liked': isPostLikedByUser }"
+              @click="likePostToggle(post._id)"
+            ></i>
+            <i class="icon icon-share-2 btn-icon" @click="share"></i>
           </div>
         </div>
 
-        <drop-menu
-          v-if="post && loggedInUser && loggedInUser._id === post.owner._id"
-          :items="items"
-          @select="select"
-        ></drop-menu>
-      </div>
-    </div>
- 
-    <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
+        <h6
+          v-if="post"
+          class="text-dark heavy px-3"
+          v-show="post.likedBy.length>0"
+        >Liked by {{post.likedBy.length}}</h6>
 
-    <div class="post-info">
-      <div class="controls flex space-between px-3 pt-2">
-        <div class="user-actions">
-          <i
-            class="icon icon-love-it-circle btn-icon"
-            :class="{'liked': isPostLikedByUser }"
-            @click="likePostToggle(post._id)"
-          ></i>
-          <i class="icon icon-megaphone btn-icon" @click="share"></i>
+        <div class="px-3 pt-3">
+          <p v-html="highlight(post.txt ,keyword)"></p>
+          <span
+            class="text-dark heavy tag mr-1 mb-2magaphone"
+            v-for="(tag,i) in post.tags"
+            :key="i"
+            v-html="highlight(tag ,keyword)"
+          ></span>
         </div>
-      </div>
-      <h6
-        v-if="post"
-        class="text-dark heavy px-3"
-        v-show="post.likedBy.length>0"
-      >Liked by {{post.likedBy.length}}</h6>
-      <div class="px-3 pt-3">
-        <p v-html="highlight(post.txt ,keyword)"></p>
-        <span
-          class="text-dark heavy tag mr-1"
-          v-for="(tag,i) in post.tags"
-          :key="i"
-          v-html="highlight(tag ,keyword)"
-        ></span>
-      </div>
+       
       <div v-if="post">
         <p v-if="post.comments.length>1" class="px-3 mt-3">{{post.comments.length}} comments</p>
         <p v-else-if="post.comments.length===1" class="px-3 mt-3">{{post.comments.length}} comment</p>
       </div>
+
       <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
         <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
         <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
+        </div>
       </div>
-    </div>
-    <hr />
+       <hr />
     <input
       class="input-comment px-3 py-2"
       placeholder="Add comment"
@@ -71,9 +76,10 @@
       class="btn-post"
       @click="saveComment(post._id)"
       :class="{'disabled' : isCommentBtnDisabled }"
-    >Post</button>
+      >Post</button>
+    </div>
   </div>
-</template>
+</template> 
 
 <script>
 import PostService from "../services/PostService";
@@ -159,7 +165,7 @@ export default {
       this.$router.push(`/PostEdit/${this.post._id}`);
     },
     highlight(txt, keyword) {
-      if (keyword.length < 2) return txt;
+      if (!keyword || keyword.length < 2) return txt;
       var iQuery = new RegExp(keyword, "ig");
       return txt.toString().replace(iQuery, function(matchedTxt) {
         return `<span style="background: yellow">${matchedTxt}</span>`;
@@ -172,16 +178,16 @@ export default {
           text: "",
           url: "https://en.wikipedia.org/wiki/Typhoon_Lekima_(2019)"
         })
-        .then(_ => console.log("Yay, you shared it :)"))
+        .then(() => console.log("Yay, you shared it :)"))
         .catch(error =>
           console.log("Oh noh! You couldn't share it! :'(\n", error)
         );
     }
   },
   filters: {
-    moment: function(date) {
-      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-    }
+    // moment: function(date) {
+    //   return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    // }
   },
 
   components: {

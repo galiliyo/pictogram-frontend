@@ -36,15 +36,6 @@ let router= new Router({
         requiresAuth: true
       }
     },
-
-    // {
-    //   path: "/Signup",
-    //   name: "Signup",
-    //   component: Signup,
-    //   meta: {
-    //     requiresAuth: false
-    //   }
-    // },
     {
       path: "/Camera",
       name: "Camera",

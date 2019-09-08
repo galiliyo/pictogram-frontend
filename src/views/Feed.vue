@@ -14,7 +14,6 @@
           :keyword="keyword"
         ></post>
       </div>
-      <div class="users-column"></div>
       <button v-if="loggedInUser" class="btn-add" @click="goEdit">
         <span>+</span>
       </button>
@@ -30,7 +29,7 @@ import Post from "../components/Post";
 export default {
   data() {
     return {
-      // alert: false,
+     
     };
   },
   created() {

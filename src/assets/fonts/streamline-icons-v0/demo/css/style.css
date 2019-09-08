@@ -146,11 +146,147 @@ icons
   font icons
 -------------------------*/
 
-.icon-share-2::before {
+.icon-asian-food-rice::before {
+    content: "\ea02";
+}
+
+.icon-beach-parasol-water::before {
     content: "\ea03";
 }
 
-.icon-love-it-circle-2::before {
+.icon-camping-tent-2::before {
+    content: "\ea04";
+}
+
+.icon-canoe-single::before {
     content: "\ea05";
+}
+
+.icon-color-painting-palette::before {
+    content: "\ea06";
+}
+
+.icon-day-sunrise-2::before {
+    content: "\ea07";
+}
+
+.icon-history-vase::before {
+    content: "\ea08";
+}
+
+.icon-megaphone::before {
+    content: "\ea09";
+}
+
+.icon-outdoors-horse::before {
+    content: "\ea0a";
+}
+
+.icon-religion-islam-pray::before {
+    content: "\ea0b";
+}
+
+.icon-scooter::before {
+    content: "\ea0c";
+}
+
+.icon-trekking-person::before {
+    content: "\ea0d";
+}
+
+.icon-close::before {
+    content: "\ea0e";
+}
+
+.icon-check-1::before {
+    content: "\ea0f";
+}
+
+.icon-check-circle::before {
+    content: "\ea10";
+}
+
+.icon-delete-1-2::before {
+    content: "\ea11";
+}
+
+.icon-delete-1-1::before {
+    content: "\ea12";
+}
+
+.icon-delete-2::before {
+    content: "\ea13";
+}
+
+.icon-delete::before {
+    content: "\ea14";
+}
+
+.icon-bin-1::before {
+    content: "\ea15";
+}
+
+.icon-maps-search::before {
+    content: "\ea16";
+}
+
+.icon-maps-pin-1::before {
+    content: "\ea17";
+}
+
+.icon-maps::before {
+    content: "\ea18";
+}
+
+.icon-maps-pin-2::before {
+    content: "\ea19";
+}
+
+.icon-sync-location::before {
+    content: "\ea1a";
+}
+
+.icon-location-user::before {
+    content: "\ea1b";
+}
+
+.icon-pin-location-1::before {
+    content: "\ea1c";
+}
+
+.icon-social-media-twitter::before {
+    content: "\ea1d";
+}
+
+.icon-social-media-facebook-1::before {
+    content: "\ea1e";
+}
+
+.icon-phone-dial::before {
+    content: "\ea1f";
+}
+
+.icon-phone::before {
+    content: "\ea20";
+}
+
+.icon-network-www::before {
+    content: "\ea21";
+}
+
+.icon-time-clock-circle::before {
+    content: "\ea22";
+}
+
+.icon-love-it-circle::before {
+    content: "\ea23";
+}
+
+.icon-pencil-write::before {
+    content: "\ea24";
+}
+
+.icon-bicycle::before {
+    content: "\ea25";
 }
 

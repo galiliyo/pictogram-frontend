@@ -75,9 +75,9 @@ export default {
           type: "loadPosts",
           params
         });
-        console.log("postsRes", postsRes);
+        // console.log("postsRes", postsRes);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     }
   },
