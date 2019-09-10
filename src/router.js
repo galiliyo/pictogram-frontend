@@ -3,8 +3,6 @@ import Router from "vue-router";
 import Feed from "./views/Feed.vue";
 import PostEdit from "./views/PostEdit.vue";
 import Camera from "./views/Camera.vue";
-import Signup from "./views/Signup.vue";
-import UserProfile from "./views/UserProfile.vue";
 
 Vue.use(Router);
 
@@ -29,14 +27,6 @@ let router= new Router({
     },
 
     {
-      path: "/UserProfile/:id",
-      name: "UserProfile",
-      component: UserProfile,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: "/Camera",
       name: "Camera",
       component: Camera,
@@ -46,22 +36,6 @@ let router= new Router({
     }
   ]
 });
-
-// router.beforeEach((to, from, next) => {
-//   // to and from are both route objects. must call `next`.
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (localStorage.getItem("jwt") == null) {
-//       next({
-//         path: "/Login",
-//         params: { nextUrl: to.fullPath }
-//       });
-//     } else {
-//       next();
-//     }
-//   } else {
-//     next();
-//   }
-// });
 
 
 export default router;

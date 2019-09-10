@@ -1,7 +1,7 @@
 <template>
   <section class="feed">
     <div class="header">
-      <AppHeader class="colorBg" @alertLoginFail="alertLoginFail()" />
+      <Navbar class="colorBg" searchBar @alertLoginFail="alertLoginFail()" />
     </div>
     <div class="main-container" :class="{background: !loggedInUser}">
       <div v-if="loggedInUser" class="posts-column">
@@ -23,7 +23,7 @@
 
 
 <script>
-import AppHeader from "../components/Header";
+import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 
 export default {
@@ -67,7 +67,7 @@ export default {
     }
   },
   components: {
-    AppHeader,
+    Navbar,
     Post
   }
 };

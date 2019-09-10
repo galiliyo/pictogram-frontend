@@ -1,11 +1,13 @@
-.background{
-    height: 100vh;
-    background-image: url('../assets/img/background/collage2.jpg');
-    background-size: cover
+.background {
+  height: 100vh;
+  background-image: url('../assets/img/background/collage2.jpg');
+  background-size: cover;
 }
 
 
-.posts-column{
-    margin: 0 auto;
-    width: 50rem
+
+@media only screen and (max-width: 640px) {
+  .btn-add {
+    display: none;
+  }
 }

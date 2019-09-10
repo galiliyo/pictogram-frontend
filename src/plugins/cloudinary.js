@@ -571,7 +571,7 @@
         ? self.fetch(
             i,
             ne(
-              { method: o, body: l, headers: r ? new Headers(r) : void 0 },
+              { method: o, body: l, headers: r ? new Navbars(r) : void 0 },
               a.fetchOptions
             )
           )
@@ -592,7 +592,7 @@
                 if (e) {
                   var t = e
                   Object.keys(t).forEach(function(e) {
-                    return n.setRequestHeader(e, t[e])
+                    return n.setRequestNavbar(e, t[e])
                   })
                 }
               })(t, r),

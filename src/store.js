@@ -7,9 +7,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: true,
-  state: {},
-  mutations: {},
-  getters: {},
+  state: {
+    showMobileSearchBar: false
+  },
+  mutations: {
+    toggleMobileSearchBar(state) {
+      state.showMobileSearchBar = !state.showMobileSearchBar
+    }
+  },
+  getters: {
+    mobileSearchBarVisibility(state){
+      return state.showMobileSearchBar
+    }
+  },
   actions: {},
   modules: {
     PostStore,

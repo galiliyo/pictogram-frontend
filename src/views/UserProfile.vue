@@ -1,33 +1,30 @@
 <template>
   <section>
     <section class="about">
-      <Header class="colorBg" />
+      <Navbar class="colorBg" />
     </section>
-
     <section class="user-profile"></section>
   </section>
 </template>
 
 <script>
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 
 export default {
   name: "user profile",
-  created :{
-
-  },
+  created: {},
   computed: {
-  loggedInUser() {
+    loggedInUser() {
       return this.$store.getters.loggedInUser;
     }
   },
   components: {
-    Header,
+    Navbar
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/views/_About.scss";
+// @import "../styles/views/_About.scss";
 </style>
 

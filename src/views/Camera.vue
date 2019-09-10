@@ -1,5 +1,6 @@
 <template>
-  <section class="post-edit">
+  <section class="camera">
+    <Navbar />
     <div ref="camera" :class="{'hide':hideCamera}"></div>
     <div v-if="hideCamera" class="main-container">
       <div class="image-container mb-4">
@@ -33,7 +34,7 @@
 
 
 <script>
-import AppHeader from "../components/Header";
+import Navbar from "../components/Navbar";
 export default {
   name: "Camera",
   data() {
@@ -137,8 +138,8 @@ export default {
             },
             fonts: {
               default: null,
-              "'IBM Plex Sans', sans-serif": {
-                url: "https://fonts.googleapis.com/css?family=IBM+Plex+Sans",
+              "Roboto, sans-serif": {
+                url: "https://fonts.googleapis.com/css?family=Roboto",
                 active: true
               }
             }
@@ -153,8 +154,14 @@ export default {
     },
 
     async save() {
-      this.post.tags = Array.from(new Set(this.tagsStr.split(",")));
+      let tags = Array.from(new Set(this.tagsStr.split(",")));
+      tags.forEach((currTag, i, tags) => {
+        currTag.trim();
+        if ((currTag === "")) tags.splice(i, 1);
+      });
 
+      this.post.tags = tags;
+      this.post.createdAt = new Date().getTime();
       try {
         await this.$store.dispatch({
           type: "save",
@@ -167,7 +174,9 @@ export default {
     }
   },
 
-  components: {}
+  components: {
+    Navbar
+  }
 };
 </script>
 

@@ -1,18 +1,15 @@
 <template>
   <div class="bottom-nav flex center">
-    <div class="nav-item flex column mt-2">
-      <v-icon class="mx-auto" dark size="42" center>add_circle</v-icon>
-      <div class="nav-label">New Post</div>
+    <div class="nav-item flex column mt-2" @click="goEdit">
+      <v-icon class="mx-auto" dark size="36" center>add_circle</v-icon>
     </div>
 
     <div class="nav-item flex column mt-2">
-      <v-icon class="mx-auto" dark size="42" center>search</v-icon>
-      <div class="nav-label">Search</div>
+      <v-icon class="mx-auto" dark size="36" center @click="toggleSearchBar">search</v-icon>
     </div>
 
-    <div class="nav-item flex column mt-2">
-      <v-icon class="mx-auto" dark size="42">account_circle</v-icon>
-      <div class="nav-label">Profile</div>
+    <div class="nav-item flex column mt-2" @click="goHome">
+      <v-icon class="mx-auto" dark size="36">home</v-icon>
     </div>
   </div>
 </template>
@@ -23,6 +20,18 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    goHome() {
+      this.$router.push("/");
+    },
+    goEdit() {
+      this.$router.push("/Camera");
+    },
+    toggleSearchBar() {
+      this.$store.commit("toggleMobileSearchBar");
+    }
+  },
+
   components: {}
 };
 </script>

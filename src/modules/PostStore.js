@@ -11,7 +11,7 @@ export default {
     setPosts(state, { posts }) {
       state.posts = posts
     },
-   
+
     remove(state, { id }) {
       const idx = state.posts.findIndex(currPost => currPost._id === id)
       state.posts.splice(idx, 1)

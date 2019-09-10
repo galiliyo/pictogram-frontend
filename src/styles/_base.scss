@@ -1,14 +1,15 @@
-
+.v-content {
+  background: #f2f2f2;
+}
 a {
   text-decoration: none;
 }
 
-.card{
+.card {
   background: #fff;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 }
-
 
 .flex {
   display: flex;
@@ -20,4 +21,8 @@ a {
 
 .column {
   flex-direction: column;
+}
+
+.slide-fade-enter-active, .slide-fade {
+  transition: all .5s;
 }

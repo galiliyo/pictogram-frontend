@@ -3,6 +3,7 @@
     <div v-if="!post || !post.owner">Loading...</div>
     <div v-if="post && post.owner && loggedInUser" class="post card mb-3">
       <div class="post-header pa-2 flex space-between">
+        <!-- Post Navbar  -->
         <div class="top-row flex">
           <div class="flex">
             <v-avatar class="avatar mr-3" :size="48">
@@ -13,7 +14,7 @@
               <span>
                 <i class="icon icon-time-clock-circle-alternate text-grey"></i>
               </span>
-              <span class="text-grey">{{post.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
+              <span class="text-grey">{{post.createdAt | moment }}</span>
             </div>
           </div>
 
@@ -24,9 +25,9 @@
           ></drop-menu>
         </div>
       </div>
-
+      <!-- Post Image -->
       <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
-
+      <!-- Post Bottom -->
       <div class="post-info">
         <div class="controls flex space-between px-3 pt-2">
           <div class="user-actions">
@@ -45,19 +46,21 @@
           v-show="post.likedBy.length>0"
         >Liked by {{post.likedBy.length}}</h6>
 
-        <div class="px-3 pt-3">
+        <div class="pa-3">
           <p v-html="highlight(post.txt ,keyword)"></p>
-          <span
-            class="text-dark heavy tag mr-1 mb-2"
-            v-for="(tag,i) in post.tags"
-            :key="i"
-            v-html="highlight(tag ,keyword)"
-          ></span>
+          <div v-if="post.tags.length>0">
+            <span
+              class="text-dark heavy tag mr-1 mb-2"
+              v-for="(tag,i) in post.tags"
+              :key="i"
+              v-html="highlight(tag ,keyword)"
+            ></span>
+          </div>
         </div>
 
         <div v-if="post">
-          <p v-if="post.comments.length>1" class="px-3 mt-3">{{post.comments.length}} comments</p>
-          <p v-else-if="post.comments.length===1" class="px-3 mt-3">{{post.comments.length}} comment</p>
+          <p v-if="post.comments.length>1" class="px-3">{{post.comments.length}} comments</p>
+          <p v-else-if="post.comments.length===1" class="px-3">{{post.comments.length}} comment</p>
         </div>
 
         <div class="px-3" v-for="(comment,i) in post.comments" :key="i">

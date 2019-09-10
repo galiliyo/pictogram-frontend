@@ -1,15 +1,14 @@
 <template>
   <section class="post-edit">
-   
-    <AppHeader class="colorBg" />
-    <div v-if="post" class="main-container">
+    <Navbar class="colorBg" />
+    <div v-if="post" class="posts-column">
       <Post :post="post" :loggedInUser="loggedInUser"></Post>
     </div>
   </section>
 </template>
 
 <script>
-import AppHeader from "../components/Header";
+import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 export default {
   data() {
@@ -58,7 +57,7 @@ export default {
     }
   },
   components: {
-    AppHeader,
+    Navbar,
     Post
   }
 };

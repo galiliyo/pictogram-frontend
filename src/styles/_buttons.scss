@@ -13,22 +13,9 @@
   text-align: center;
   box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
-}
-
-.btn-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: $primary-btn-hover;
-  opacity: 0;
-  transition: opacity 0.4s;
-  z-index: -1;
-}
-.btn-main:hover::before {
-  opacity: 1;
+  &:hover{
+    background: $appOrange;
+  }
 }
 
 .btn-add {
@@ -42,10 +29,7 @@
   bottom: 6rem;
   right: 6rem;
   transition: all 0.4s;
-  opacity: 0.8;
-  &:hover {
-    opacity: 1;
-  }
+  
 }
 
 .btn-add > span {
@@ -70,3 +54,4 @@ i.btn-icon {
     cursor: initial;
   }
 }
+
