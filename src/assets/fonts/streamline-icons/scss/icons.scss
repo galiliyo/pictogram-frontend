@@ -7,6 +7,7 @@
 
 $icon-share-2: unicode(ea03);
 $icon-love-it-circle-2: unicode(ea05);
+$icon-time-clock-circle-alternate: unicode(ea06);
 
 .icon-share-2::before {
   content: $icon-share-2;
@@ -14,5 +15,9 @@ $icon-love-it-circle-2: unicode(ea05);
 
 .icon-love-it-circle-2::before {
   content: $icon-love-it-circle-2;
+}
+
+.icon-time-clock-circle-alternate::before {
+  content: $icon-time-clock-circle-alternate;
 }
 

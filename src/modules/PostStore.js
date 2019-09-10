@@ -11,9 +11,7 @@ export default {
     setPosts(state, { posts }) {
       state.posts = posts
     },
-    setloggedInUser(state, { posts }) {
-      state.posts = posts
-    },
+   
     remove(state, { id }) {
       const idx = state.posts.findIndex(currPost => currPost._id === id)
       state.posts.splice(idx, 1)
@@ -32,6 +30,17 @@ export default {
       console.log('keyword', keyword)
 
       state.keyword = keyword
+    },
+    updateLikes(state, { loggedInUser, postId, isLiked }) {
+      let post = state.posts.find(currPost => currPost._id === postId)
+
+      if (!isLiked) {
+        post.likedBy = post.likedBy.filter(userId => {
+          return userId !== loggedInUser._id
+        })
+      } else {
+        post.likedBy.push(loggedInUser._id)
+      }
     }
   },
   getters: {

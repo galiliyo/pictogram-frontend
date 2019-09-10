@@ -14,7 +14,6 @@
     "cloudinary-core": "^2.7.3",
     "cloudinary-vue": "^1.0.0-beta2",
     "core-js": "^2.6.5",
-    "moment": "^2.24.0",
     "register-service-worker": "^1.6.2",
     "share-menu": "^4.0.0-rc.4",
     "vee-validate": "^2.2.14",

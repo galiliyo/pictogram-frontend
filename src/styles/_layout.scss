@@ -12,6 +12,12 @@ html {
   padding: 90px 3rem;
 }
 
+.posts-column{
+  margin: 0 auto;
+  width: 50rem;
+  max-width: 600px;
+}
+
 @media only screen and (max-width: 640px) {
   .main-container {
     padding: 1rem 0;

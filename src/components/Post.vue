@@ -11,14 +11,14 @@
             <div class="header-txt">
               <h6 v-if="post.owner">{{post.owner.firstName}} {{post.owner.lastName}}</h6>
               <span>
-                <i class="icon clock-outline"></i>
+                <i class="icon icon-time-clock-circle-alternate text-grey"></i>
               </span>
-              <span class="text-grey">{{post.createdAt }}</span>
+              <span class="text-grey">{{post.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
             </div>
           </div>
 
           <drop-menu
-            v-if="post && post.owner && loggedInUser && loggedInUser._id === post.owner._id"
+            v-if="post.owner && loggedInUser && loggedInUser._id === post.owner._id"
             :items="items"
             @select="select"
           ></drop-menu>
@@ -48,34 +48,34 @@
         <div class="px-3 pt-3">
           <p v-html="highlight(post.txt ,keyword)"></p>
           <span
-            class="text-dark heavy tag mr-1 mb-2magaphone"
+            class="text-dark heavy tag mr-1 mb-2"
             v-for="(tag,i) in post.tags"
             :key="i"
             v-html="highlight(tag ,keyword)"
           ></span>
         </div>
-       
-      <div v-if="post">
-        <p v-if="post.comments.length>1" class="px-3 mt-3">{{post.comments.length}} comments</p>
-        <p v-else-if="post.comments.length===1" class="px-3 mt-3">{{post.comments.length}} comment</p>
-      </div>
 
-      <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
-        <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
-        <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
+        <div v-if="post">
+          <p v-if="post.comments.length>1" class="px-3 mt-3">{{post.comments.length}} comments</p>
+          <p v-else-if="post.comments.length===1" class="px-3 mt-3">{{post.comments.length}} comment</p>
+        </div>
+
+        <div class="px-3" v-for="(comment,i) in post.comments" :key="i">
+          <span class="text-dark heavy text-body">{{comment.ownerFullName}}&nbsp;</span>
+          <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
         </div>
       </div>
-       <hr />
-    <input
-      class="input-comment px-3 py-2"
-      placeholder="Add comment"
-      type="text"
-      v-model="newCommentTxt"
-    />
-    <button
-      class="btn-post"
-      @click="saveComment(post._id)"
-      :class="{'disabled' : isCommentBtnDisabled }"
+      <hr />
+      <input
+        class="input-comment px-3 py-2"
+        placeholder="Add comment"
+        type="text"
+        v-model="newCommentTxt"
+      />
+      <button
+        class="btn-post"
+        @click="saveComment(post._id)"
+        :class="{'disabled' : isCommentBtnDisabled }"
       >Post</button>
     </div>
   </div>
@@ -84,6 +84,8 @@
 <script>
 import PostService from "../services/PostService";
 import DropMenu from "./DropMenu";
+const moment = require("moment");
+
 export default {
   name: "post",
   props: {
@@ -147,6 +149,11 @@ export default {
         postId: this.post._id,
         isLiked: this.isPostLikedByUser
       });
+      this.$store.commit("updateLikes", {
+        postId: this.post._id,
+        isLiked: this.isPostLikedByUser,
+        loggedInUser: this.$store.getters.loggedInUser
+      });
     },
     saveComment: async function(postId) {
       if (this.newCommentTxt === "") return;
@@ -185,9 +192,9 @@ export default {
     }
   },
   filters: {
-    // moment: function(date) {
-    //   return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-    // }
+    moment: function(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm a");
+    }
   },
 
   components: {
@@ -195,7 +202,6 @@ export default {
   }
 };
 </script>
-
 
 
 <style lang="scss" scoped>
