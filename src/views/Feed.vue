@@ -28,9 +28,7 @@ import Post from "../components/Post";
 
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
   created() {
     this.loadPosts();

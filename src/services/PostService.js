@@ -11,8 +11,6 @@ export default {
 };
 
 function query(params) {
-  console.log('params @ query',params);
-  
   return HttpService.get(_getUrl(), params);
 }
 
@@ -37,9 +35,9 @@ async function saveComment(postId, newCommentTxt) {
     postId,
     userId: AuthService.getLoggedInUser()._id,
     txt: newCommentTxt,
-    timeStamp:  Date.now()
+    timeStamp: Date.now()
   };
-   return HttpService.put(_getUrl(`comment/${postId}`),comment)
+  return HttpService.put(_getUrl(`comment/${postId}`), comment);
 }
 
 async function handleUploadImage(file) {

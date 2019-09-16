@@ -5,6 +5,7 @@
       <router-view></router-view>
     </v-content>
     <Bottom-Nav v-if="isMobile"></Bottom-Nav>
+   
   </v-app>
 </template>
 
@@ -17,14 +18,12 @@ export default {
   data() {
     return {};
   },
-  created() {
-
-  },
+  created() {},
   computed: {
     isMobile() {
-     let is= this.$store.getters.isMobile;
-      console.log('isMobile',is);
-      return is
+      let is = this.$store.getters.isMobile;
+      console.log("isMobile", is);
+      return is;
     }
   },
   methods: {},

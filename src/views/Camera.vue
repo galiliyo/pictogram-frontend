@@ -1,8 +1,8 @@
 <template>
   <section class="camera">
     <Navbar />
-    <div ref="camera" :class="{'hide':hideCamera}"></div>
-    <div v-if="hideCamera" class="main-container">
+    <div ref="camera" class="main-container" :class="{'hide':hideCamera}"></div>
+    <div v-if="hideCamera">
       <div class="image-container mb-4">
         <v-img :src="post.mediaUrl" contain />
       </div>
@@ -122,19 +122,19 @@ export default {
           defaultSource: "camera",
           styles: {
             palette: {
-              window: "#10173a",
-              sourceBg: "#20304b",
-              windowBorder: "#7171D0",
-              tabIcon: "#79F7FF",
-              inactiveTabIcon: "#8E9FBF",
-              menuIcons: "#CCE8FF",
-              link: "#72F1FF",
-              action: "#FFFFFF",
-              inProgress: "#00ffcc",
-              complete: "#33ff00",
-              error: "#cc3333",
+              window: "#FFFFFF",
+              windowBorder: "#90A0B3",
+              tabIcon: "#0078FF",
+              menuIcons: "#5A616A",
               textDark: "#000000",
-              textLight: "#ffffff"
+              textLight: "#FFFFFF",
+              link: "#0078FF",
+              action: "#FF620C",
+              inactiveTabIcon: "#0E2F5A",
+              error: "#F44235",
+              inProgress: "#0078FF",
+              complete: "#20B832",
+              sourceBg: "#E4EBF1"
             },
             fonts: {
               default: null,
@@ -157,7 +157,7 @@ export default {
       let tags = Array.from(new Set(this.tagsStr.split(",")));
       tags.forEach((currTag, i, tags) => {
         currTag.trim();
-        if ((currTag === "")) tags.splice(i, 1);
+        if (currTag === "") tags.splice(i, 1);
       });
 
       this.post.tags = tags;

@@ -20,7 +20,7 @@ export default {
       state.users.splice(idx, 1, user);
       if (state.loggedInUser && state.loggedInUser._id === user._id)
         state.loggedInUser = user;
-    },
+    }
   },
   getters: {
     loggedInUser(state) {
@@ -64,15 +64,14 @@ export default {
         throw err;
       }
     },
-    async toggleLikes(context,   {postId} ) {
-      let updatedUser = await UserService.toggleLike(postId)
-      console.log('updated user', updatedUser)
-     sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-      context.commit('setLoggedInUser', {user: updatedUser})
-      return updatedUser
+    async toggleLikes(context, { postId }) {
+      let updatedUser = await UserService.toggleLike(postId);
+      sessionStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+      context.commit("setLoggedInUser", { user: updatedUser });
+      return updatedUser;
     },
 
-    async getUsers(context, { postId = 'allPosts' }) {
+    async getUsers(context, { postId = "allPosts" }) {
       const users = await UserService.query(postId);
       context.commit({ type: "setUsers", users });
     }

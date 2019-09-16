@@ -13,19 +13,15 @@
   top: 10rem;
 }
 
-//TODO : center mixin
-
-
 .link {
-  color: #F27121;
+  color: #f27121;
   cursor: pointer;
   & :hover {
     color: deep-orange accent-1;
   }
 }
 
-
-p{
+p {
   margin: 20px auto;
-  text-align: center
+  text-align: center;
 }

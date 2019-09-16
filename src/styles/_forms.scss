@@ -2,9 +2,8 @@
   width: 340px;
 }
 .med-input {
-//   width: 70%;
   max-width: 750px;
-  margin: 0 auto,
+  margin: 0 auto;
 }
 .input-comment {
   height: 4rem;
@@ -13,15 +12,12 @@
   outline: none;
 }
 
-
-
-.image-containerP{
-    position: absolute;
-    top:0;
-    width: 100%
+.image-containerP {
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-.v-input__slot{
+.v-input__slot {
   min-height: 32px !important;
- 
 }

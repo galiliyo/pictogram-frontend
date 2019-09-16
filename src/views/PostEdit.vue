@@ -21,7 +21,6 @@ export default {
     const postId = this.$route.params.id;
 
     this.post = await this.$store.dispatch({ type: "getById", postId });
-    console.log("post", this.post);
   },
   mounted() {},
   computed: {
@@ -40,7 +39,6 @@ export default {
             type: "save",
             post: this.post
           });
-          console.log(newPost);
         } catch (err) {
           console.log(err);
         }

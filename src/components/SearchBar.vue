@@ -31,8 +31,6 @@ export default {
   computed: {},
   methods: {
    onChange() {
-      console.log('value',this.value);
-      
       this.$emit('onValueChange',this.value);
     },
     clickClear(){

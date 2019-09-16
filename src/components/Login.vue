@@ -7,7 +7,7 @@
           label="E-mail"
           type="email"
           autofocus
-            :rules="[v => !!v || 'Item is required']"
+          :rules="[v => !!v || 'Item is required']"
           append-icon="email"
           color="deep-orange accent-3"
           minlength="3"
@@ -17,7 +17,7 @@
           label="Password"
           type="password"
           append-icon="lock"
-            :rules="[v => !!v || 'Item is required']"
+          :rules="[v => !!v || 'Item is required']"
           class="input-password"
           color="deep-orange accent-3"
           minlength="2"
@@ -105,10 +105,9 @@ export default {
 
   data() {
     return {
-      user: { email: "", pass: "" },
+      user: { email: "guest-user@login.com", pass: "1234" },
       newUser: {
         email: "",
-        pass: "",
         firstName: "",
         lastName: "",
         imgUrl:
@@ -133,13 +132,12 @@ export default {
         await this.$store.dispatch({ type: "login", user: this.user });
       } catch (err) {
         console.log(err);
-        
+
         this.$notify({
           type: "error",
           title: "Login failed",
           text: "Wrong user name or password",
-          duration : 4000
-          
+          duration: 4000
         });
       }
     },
@@ -157,15 +155,13 @@ export default {
         this.$notify({
           title: "Success!",
           text: "User account created successfuly",
-          type: "success",
-          
+          type: "success"
         });
       } catch (err) {
         this.$notify({
           title: "Signup Failed",
           text: err.response.data.error,
-          type: "warning",
-          
+          type: "warning"
         });
       }
     }

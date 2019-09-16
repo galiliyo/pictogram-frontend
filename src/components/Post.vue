@@ -36,7 +36,7 @@
               :class="{'liked': isPostLikedByUser }"
               @click="likePostToggle(post._id)"
             ></i>
-            <i class="icon icon-share-2 btn-icon" @click="share"></i>
+            <i class="icon icon-share-2 btn-icon" @click="share(post._id)"></i>
           </div>
         </div>
 
@@ -181,14 +181,21 @@ export default {
         return `<span style="background: yellow">${matchedTxt}</span>`;
       });
     },
-    share() {
+    share(postId) {
+      let BaseURL = "";
+
+      if (process.env.NODE_ENV === "production") {
+        BaseURL = "http://pictogram-app.herokuapp.com/#/PostEdit/";
+      } else {
+        BaseURL = `http://localhost:8080/#/PostEdit/`;
+      }
+
       navigator
         .share({
           title: `Check out this Pictogram by ${this.post.owner.firstName}`,
           text: "",
-          url: "https://en.wikipedia.org/wiki/Typhoon_Lekima_(2019)"
+          url: BaseURL + postId
         })
-        .then(() => console.log("Yay, you shared it :)"))
         .catch(error =>
           console.log("Oh noh! You couldn't share it! :'(\n", error)
         );
@@ -196,7 +203,7 @@ export default {
   },
   filters: {
     moment: function(date) {
-      return moment(date).format("MMMM Do YYYY, h:mm a");
+      return moment(date).format("MMM Do YYYY, h:mm a");
     }
   },
 
