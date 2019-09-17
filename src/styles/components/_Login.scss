@@ -25,3 +25,12 @@ p {
   margin: 20px auto;
   text-align: center;
 }
+
+@media only screen and (max-width: 640px) {
+  .login-container {
+    top: 0;
+    width: 90%;
+    margin-top: 10%;
+    padding-bottom: 2rem;
+  }
+}

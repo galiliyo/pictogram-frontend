@@ -105,7 +105,7 @@ export default {
 
   data() {
     return {
-      user: { email: "guest-user@login.com", pass: "1234" },
+      user: { email: "guest-user@login.com", pass: "12345678" },
       newUser: {
         email: "",
         firstName: "",

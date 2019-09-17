@@ -4,12 +4,9 @@
       <notifications position="bottom center" classes="notifications" />
       <router-view></router-view>
     </v-content>
-    <Bottom-Nav v-if="isMobile"></Bottom-Nav>
-   
+    <Bottom-Nav v-if="this.loggedInUser"></Bottom-Nav>
   </v-app>
 </template>
-
-
 
 <script>
 import BottomNav from "./components/BottomNav";
@@ -20,10 +17,8 @@ export default {
   },
   created() {},
   computed: {
-    isMobile() {
-      let is = this.$store.getters.isMobile;
-      console.log("isMobile", is);
-      return is;
+    loggedInUser() {
+      return this.$store.getters.loggedInUser;
     }
   },
   methods: {},
