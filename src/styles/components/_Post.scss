@@ -1,35 +1,35 @@
 .post-preview {
   list-style-type: none;
-  // min-width:300px;
   cursor: pointer;
 }
-
 
 .post-info {
   background: #fff;
 }
 
-
-.liked{
-  color:red
+.liked {
+  color: red;
 }
 
-.highlight{ 
-background-color: yellow;
+.highlight {
+  background-color: yellow;
 }
 
-span.tag{
+span.tag {
   background: rgb(221, 221, 230);
   border-radius: 6px;
   padding: 0.2rem 0.8rem;
   margin-bottom: 12px;
 }
 
-
-.header-txt .icon{
+.header-txt .icon {
   line-height: 19px;
   vertical-align: baseline;
   position: relative;
   top: 1px;
   opacity: 0.8;
+}
+
+.image-container .caption-form {
+  width: 90%;
 }

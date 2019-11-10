@@ -29,7 +29,7 @@
       <v-img :src="post.mediaUrl" aspect-ratio="1.6" @click="gotoPost"></v-img>
       <!-- Post Bottom -->
       <div class="post-info">
-        <div class="controls flex space-between px-3 pt-2">
+        <div class="controls flex space-between px-3 pt-3">
           <div class="user-actions">
             <i
               class="icon icon-love-it-circle-2 btn-icon"
@@ -46,7 +46,7 @@
           v-show="post.likedBy.length>0"
         >Liked by {{post.likedBy.length}}</h6>
 
-        <div class="pa-3">
+        <div class="py-2 px-3">
           <p v-html="highlight(post.txt ,keyword)"></p>
           <div v-if="post.tags.length>0">
             <span
@@ -59,7 +59,7 @@
         </div>
 
         <div v-if="post">
-          <p v-if="post.comments.length>1" class="px-3">{{post.comments.length}} comments</p>
+          <p v-if="post.comments.length>1" class="px-3 mb-3">{{post.comments.length}} comments</p>
           <p v-else-if="post.comments.length===1" class="px-3">{{post.comments.length}} comment</p>
         </div>
 
@@ -68,18 +68,20 @@
           <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
         </div>
       </div>
-      <hr />
-      <input
-        class="input-comment px-3 py-2"
-        placeholder="Add comment"
-        type="text"
-        v-model="newCommentTxt"
-      />
-      <button
-        class="btn-post"
-        @click="saveComment(post._id)"
-        :class="{'disabled' : isCommentBtnDisabled }"
-      >Post</button>
+      <hr class="mt-3"/>
+      <div class="d-flex space-between">
+        <input
+          class="input-comment px-3 py-2"
+          placeholder="Add comment"
+          type="text"
+          v-model="newCommentTxt"
+        />
+        <button
+          class="btn-post"
+          @click="saveComment(post._id)"
+          :class="{'disabled' : isCommentBtnDisabled }"
+        >Post</button>
+      </div>
     </div>
   </div>
 </template> 

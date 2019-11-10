@@ -61,7 +61,7 @@ button {
   padding-top: 12px;
 }
 .logo {
-  height: 44px;
+  height: 36px;
 }
 @media only screen and (max-width: 640px) {
   .topNav {
@@ -75,12 +75,14 @@ button {
     display: flex;
     align-items: center;
     position: fixed;
-    top:0;
-    z-index: 100
+    top: 0;
+    z-index: 100;
   }
   .search-bar {
     margin: 0 auto;
   }
-  .search-field {width: 80vw;
-  margin: 0 auto;}
+  .search-field {
+    width: 80vw;
+    margin: 0 auto;
+  }
 }

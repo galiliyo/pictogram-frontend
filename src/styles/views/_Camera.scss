@@ -29,7 +29,7 @@
 
 .image-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -41,6 +41,12 @@
   .main-container {
     width: 100vw;
     margin: 0 auto;
-    padding:0;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:770px) {
+  .caption-form {
+    width: 90%;
+    margin:0 auto
   }
 }

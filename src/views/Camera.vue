@@ -6,28 +6,30 @@
       <div class="image-container mb-4">
         <v-img :src="post.mediaUrl" contain />
       </div>
-      <v-text-field
-        label="Caption"
-        type="img"
-        class="med-input"
-        autofocus
-        color="deep-orange accent-3"
-        minlength="3"
-        v-model="post.txt"
-        required
-      />
-      <v-text-field
-        label="Tags"
-        type="img"
-        class="med-input"
-        placeholder="Enter tags, seperated by comma"
-        color="deep-orange accent-3"
-        minlength="3"
-        v-model="tagsStr"
-        required
-      />
+      <div class="caption-form">
+        <v-text-field
+          label="Caption"
+          type="img"
+          class="med-input"
+          autofocus
+          color="deep-orange accent-3"
+          minlength="3"
+          v-model="post.txt"
+          required
+        />
+        <v-text-field
+          label="Tags"
+          type="img"
+          class="med-input"
+          placeholder="Enter tags, seperated by comma"
+          color="deep-orange accent-3"
+          minlength="3"
+          v-model="tagsStr"
+          required
+        />
 
-      <button @click="save" class="btn-main">Save</button>
+        <button @click="save" class="btn-main">Save</button>
+      </div>
     </div>
   </section>
 </template>

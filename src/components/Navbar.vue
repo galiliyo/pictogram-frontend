@@ -11,7 +11,7 @@
     <div class="topNav">
       <div class="navbar flex">
         <div>
-          <img class="logo" src="../assets/img/logo/Pictogram-white.svg" alt />
+          <img class="logo mt-1 mr-2" src="../assets/img/logo/Pictogram-white.svg"  />
         </div>
         <SearchBar v-if="loggedInUser && searchBar" @onValueChange="setFilter($event)" />
 
