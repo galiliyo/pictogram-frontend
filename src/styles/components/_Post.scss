@@ -30,6 +30,8 @@ span.tag {
   opacity: 0.8;
 }
 
-.image-container .caption-form {
-  width: 90%;
+.comment-container {
+  display: flex;
+  justify-content: space-between;
+  // background: cadetblue;
 }

@@ -68,8 +68,8 @@
           <span v-html="highlight(comment.txt ,keyword)">&nbsp;</span>
         </div>
       </div>
-      <hr class="mt-3"/>
-      <div class="d-flex space-between">
+      <hr class="mt-3" />
+      <div class="comment-container">
         <input
           class="input-comment px-3 py-2"
           placeholder="Add comment"
@@ -189,7 +189,8 @@ export default {
       if (process.env.NODE_ENV === "production") {
         BaseURL = "http://pictogram-app.herokuapp.com/#/PostEdit/";
       } else {
-        BaseURL = `http://localhost:8080/#/PostEdit/`;
+        // BaseURL = `http://localhost:8080/#/PostEdit/`;
+        BaseURL = "http://pictogram-app.herokuapp.com/#/PostEdit/";
       }
 
       navigator
